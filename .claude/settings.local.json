@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:revistasiniestro.com.mx)",
+      "WebFetch(domain:www.deloitte.com)",
+      "WebFetch(domain:amisprensa.org)",
+      "WebFetch(domain:www.amisprensa.org)",
+      "WebFetch(domain:www.aseguratunegocio.com)",
+      "WebFetch(domain:www.chubb.com)",
+      "WebFetch(domain:www.aig.com.mx)",
+      "WebFetch(domain:www.elfinanciero.com.mx)",
+      "WebFetch(domain:seguroambiental.mx)",
+      "WebFetch(domain:www.zurich.com.mx)",
+      "WebFetch(domain:www.suramexico.com)",
+      "WebFetch(domain:seguros.comunicaciones.sura.com)",
+      "WebFetch(domain:qinversionistas.qualitas.com.mx)",
+      "WebFetch(domain:www.gnp.com.mx)",
+      "Bash(git init:*)",
+      "Bash(git branch:*)"
+    ]
+  }
+}
