@@ -1,36 +1,36 @@
 # Resumen Ejecutivo
-## Estudio de Mercado — Sector Asegurador México 2024–2025
+## Estudio de Mercado — Sector Asegurador México 2025
 ### Aldebaran Consulting — Market Intelligence
 
-**Fecha:** Marzo 2026 | **Cliente:** Liderazgo de Operaciones — LCG | **Versión:** 1.0
+**Fecha:** Abril 2026 | **Cliente:** Liderazgo de Operaciones — LCG | **Versión:** 2.0
 
 ---
 
 ## El Mercado en Cifras
 
-El sector asegurador mexicano cerró 2024 con **primas directas superiores a $936,000 M MXN**, un crecimiento real del **17%** y 113 instituciones activas. La tendencia se sostuvo en 1T 2025 con 12.3% de crecimiento. Sin embargo, las utilidades cayeron por mayor siniestralidad — se vende más que nunca pero se gana menos.
+El sector asegurador mexicano cerró 2025 con **primas directas de $1,025,001 M MXN**, superando por primera vez el billón de pesos, con un crecimiento nominal del **12.0%** respecto a 2024. El crecimiento se moderó tras el salto de 17% en 2024, pero se mantiene robusto y por encima de la inflación.
 
-La penetración del seguro en México (2.4–3.2% del PIB) sigue muy por debajo del promedio OCDE (9.3%), lo que representa una **oportunidad estructural de crecimiento**, especialmente en líneas especializadas.
+La penetración del seguro en México (2.6–3.4% del PIB) sigue muy por debajo del promedio OCDE (9.3%), lo que representa una **oportunidad estructural de crecimiento**, especialmente en líneas especializadas.
 
-| Ramo | Prima 2024 (MXN M) | % del sector | Líder |
-|------|-------------------|-------------|-------|
-| Vida | $375,511 | 41.3% | MetLife |
-| Autos | $193,217 | 21.3% | Quálitas (34.1%) |
-| A&E / GMM | $169,654 | 18.7% | GNP (>24%) |
-| Daños sin Autos | $131,819 | 14.5% | Fragmentado |
-| Pensiones | $38,588 | 4.2% | — |
+| Ramo | Prima 2025 (MXN M) | % del sector | Crec. YoY | Líder |
+|------|-------------------|-------------|-----------|-------|
+| Vida | $419,079 | 40.9% | +11.5% | BBVA (16.7%) |
+| Autos | $212,351 | 20.7% | +9.9% | Quálitas (~34%) |
+| A&E / GMM | $188,948 | 18.4% | +11.4% | GNP (~26%) |
+| Daños sin Autos | $158,795 | 15.5% | +12.1% | Fragmentado |
+| Pensiones | $45,827 | 4.5% | +18.8% | Pensiones Banorte |
 
 ---
 
 ## Hallazgos Clave por Ramo
 
-**GMM:** Inflación médica de 14.9% (vs 3.9% general) presiona la sostenibilidad. Siniestralidad subió a 74%. Solo 10% de la población tiene póliza. GNP lidera individual, MetLife colectivo.
+**GMM:** Prima de $177,180 M MXN (+11.9%). GNP lidera individual (30.2%), MetLife colectivo (32.5%). Inflación médica de 14.9% sigue presionando. Solo 10% de la población tiene póliza.
 
-**Autos:** Crecimiento de 26.3% — el mayor del sector. Quálitas domina con 34.1%. Canal digital crece aceleradamente. Autos eléctricos emergen como nuevo segmento.
+**Autos:** Desacelera a +9.9% (vs +26.3% en 2024) con prima de $212,351 M. Quálitas estable en ~34%. Las medianas cierran la brecha con las grandes.
 
-**Vida:** Bancaseguros domina (~45% de prima). BBVA, Banorte y Citibanamex crecen agresivamente. MetLife lidera en individual y grupal.
+**Vida:** BBVA supera a MetLife como líder del ramo (16.7% vs 13.2%). Banorte creció +38.9%. Banamex única grande en decrecer (-7.8%). Bancaseguros sigue dominando.
 
-**Daños / RC:** Mercado fragmentado y técnico. Distribuido vía brokers especializados. **Responsabilidad Civil es el subramo con mayor potencial de crecimiento.**
+**Daños / RC:** Daños sin Autos crece a $158,795 M (+12.1%). Mercado fragmentado y técnico. **Responsabilidad Civil es el subramo con mayor potencial de crecimiento.**
 
 ---
 
@@ -58,19 +58,19 @@ RC representa **<5% del ramo Daños** en México, vs 15–20% en mercados maduro
 
 ## Gap Analysis — Sura México
 
-Sura opera en México desde 2016 con fortaleza en PyMEs y paquetes multirriesgo. El análisis revela:
+Sura cerró 2025 con **$7,011 M MXN en prima directa** (+8.3%), posición 25 del mercado (0.72% de participación). Creció por debajo del mercado (11.6%), perdiendo participación marginalmente.
 
-| Producto | Estado Sura | Implicación |
-|----------|------------|-------------|
-| GMM | ✅ Competitivo | SA máx $50M (mercado ofrece ilimitada) |
-| Autos | ✅ Competitivo | Participación <3%; fuera del top 5 |
-| Vida | ⚠️ Presente | Sin canal bancario ni vida crédito |
-| Daños tradicionales | ✅ Sólido | Plan Empresario SURA integrado |
-| RC Cyber | ✅ Producto completo | Ventaja competitiva vs nacionales |
-| **E&O** | **❌ No detectado** | **Brecha crítica** |
-| **D&O** | **⚠️ Limitado** | **No catalogado públicamente** |
-| RC Ambiental | ⚠️ Solo accidental | Sin cobertura gradual |
-| RC Patronal | ⚠️ Solo endoso | Sin producto dedicado |
+| Producto | Estado Sura | Prima 2025 | Implicación |
+|----------|------------|-----------|-------------|
+| GMM | ✅ Competitivo | $979 M (+30.8%) | Mayor ramo de crecimiento. SA máx $50M |
+| Autos | ✅ Competitivo | $2,201 M (+10.6%) | Ramo más grande de Sura |
+| Vida | ⚠️ Presente | $1,144 M (-9.2%) | Decreció. Sin canal bancario ni vida crédito |
+| Daños tradicionales | ✅ Sólido | $2,481 M | Plan Empresario SURA integrado |
+| RC Cyber | ✅ Producto completo | — | Ventaja competitiva vs nacionales |
+| **E&O** | **❌ No detectado** | **—** | **Brecha crítica** |
+| **D&O** | **⚠️ Limitado** | **—** | **No catalogado públicamente** |
+| RC Ambiental | ⚠️ Solo accidental | — | Sin cobertura gradual |
+| RC Patronal | ⚠️ Solo endoso | — | Sin producto dedicado |
 
 ---
 
@@ -91,5 +91,6 @@ Sura opera en México desde 2016 con fortaleza en PyMEs y paquetes multirriesgo.
 ---
 
 **Documentación completa:** `outputs/estudio-mercado-completo.md` | **58+ fuentes** documentadas en `referencias/fuentes.md`
+**Datos:** AMIS EstadísticAMIS Q4 2025 | CNSF Primas por Estado Q4 2025 | Participación SURA Q4 2025 | Resultados AMIS Q4 2025
 
-**Aldebaran Consulting — Market Intelligence** | Marzo 2026
+**Aldebaran Consulting — Market Intelligence** | Abril 2026

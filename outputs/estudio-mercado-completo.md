@@ -1,10 +1,10 @@
 # Estudio de Mercado — Sector Asegurador México
 ## Aldebaran Consulting — Market Intelligence
 
-**Fecha:** Marzo 2026
+**Fecha:** Abril 2026
 **Cliente interno:** Liderazgo de Operaciones — LCG
 **Uso previsto:** Análisis estratégico / insumo para propuesta de valor hacia clientes del sector asegurador
-**Versión:** 1.0
+**Versión:** 2.0 — Actualización con datos Q4 2025 (cierre anual)
 
 ---
 
@@ -14,31 +14,28 @@
 
 ## 1. Dimensión del Mercado
 
-El sector asegurador mexicano se consolidó en 2024 como una industria de escala significativa, con **primas directas superiores a $936,000 millones de pesos** (MXN), lo que representó un crecimiento real del **17% respecto a 2023** (Fuente: CNSF, Desempeño Oportuno 4T 2024).
+El sector asegurador mexicano cerró 2025 con **primas directas de $1,025,001 millones de pesos** (MXN), lo que representó un crecimiento nominal del **12.0% respecto a 2024** (Fuente: AMIS, EstadísticAMIS Q4 2025, actualización 27-feb-2026). Excluyendo pensiones, las primas alcanzaron **$979,172 M MXN** con un crecimiento de **11.7%**.
 
-Al cierre de 2024, el sector estaba compuesto por **113 instituciones** aseguradoras y afianzadoras, que colectivamente emitieron primas por **$1.076 billones de pesos** incluyendo reaseguro (Fuente: CNSF, 2025).
+El mercado mantiene una trayectoria de crecimiento sostenido: tras el salto de 17% en 2024, el ritmo se moderó pero sigue por encima de la inflación, consolidando al sector como una industria que ya supera el billón de pesos en prima directa.
 
-Para el primer trimestre de 2025, la tendencia de crecimiento se mantuvo robusta: las primas directas acumularon **$290,900 millones de pesos**, con un crecimiento real anual de **12.3%** (Fuente: CNSF, Desempeño 1T 2025, vía Revista Siniestro, junio 2025).
-
-| Indicador | Valor | Fuente |
-|-----------|-------|--------|
-| Prima directa total (2024) | >$936,000 M MXN | CNSF 4T 2024 |
-| Prima total incluyendo reaseguro (2024) | $1,076,000 M MXN | CNSF 2025 |
-| Crecimiento real YoY (2024 vs 2023) | +17% | CNSF 4T 2024 |
-| Instituciones activas | 113 | CNSF 2025 |
-| Siniestros pagados (2024) | $552,000 M MXN | AMIS, marzo 2025 |
+| Indicador | Valor 2025 | Valor 2024 | Fuente |
+|-----------|-----------|-----------|--------|
+| Prima directa total | **$1,025,001 M MXN** | $915,229 M MXN | AMIS Q4 2025 |
+| Prima directa sin pensiones | **$979,172 M MXN** | $876,641 M MXN | AMIS Q4 2025 |
+| Crecimiento nominal YoY | **+12.0%** | +17% | AMIS Q4 2025 |
+| Incremento absoluto | **+$109,772 M MXN** | — | AMIS Q4 2025 |
 
 ---
 
 ## 2. Penetración y Densidad
 
-México mantiene una **brecha significativa de penetración** frente a mercados comparables:
+México mantiene una **brecha significativa de penetración** frente a mercados comparables. Con primas que ya superan el billón de pesos, la penetración se ha incrementado marginalmente pero sigue lejos de referentes internacionales:
 
 | Indicador | México | Promedio LATAM | Promedio OCDE | Chile (líder regional) |
 |-----------|--------|---------------|---------------|----------------------|
-| Penetración (primas/PIB) | **2.4–3.2%** | 3.0% | 9.3% | 4.7% |
+| Penetración (primas/PIB) | **2.6–3.4%** | 3.0% | 9.3% | 4.7% |
 
-*Nota: La CNSF reporta penetración de 2.4% (2023) mientras Deloitte estima 3.2% incluyendo pensiones. Fuentes: La Jornada/CNSF oct 2023; Deloitte SLATAM 2024.*
+*Nota: Estimación actualizada considerando el crecimiento del primaje 2025 vs PIB nominal estimado. Fuentes: CNSF; Deloitte SLATAM 2024.*
 
 Esta brecha representa tanto un desafío como una **oportunidad sustancial de crecimiento**, particularmente en ramos de baja penetración como Responsabilidad Civil, Cyber y líneas especializadas de Daños.
 
@@ -46,48 +43,53 @@ Esta brecha representa tanto un desafío como una **oportunidad sustancial de cr
 
 ## 3. Distribución por Ramo
 
-Al cierre de diciembre de 2024, la composición del mercado por operación fue la siguiente:
+Al cierre de diciembre de 2025, la composición del mercado por operación fue la siguiente:
 
-| Ramo / Operación | Prima directa (MXN M) | Participación (%) |
-|------------------|----------------------|-------------------|
-| **Vida** | $375,511 | **41.3%** |
-| **Automóviles** | $193,217 | **21.3%** |
-| **Accidentes y Enfermedades** (incl. GMM) | $169,654 | **18.7%** |
-| **Daños (sin Autos)** | $131,819 | **14.5%** |
-| **Pensiones** | $38,588 | **4.2%** |
+| Ramo / Operación | Prima directa (MXN M) | Participación (%) | Crec. YoY |
+|------------------|----------------------|-------------------|-----------|
+| **Vida** | $419,079 | **40.9%** | +11.5% |
+| **Automóviles** | $212,351 | **20.7%** | +9.9% |
+| **Accidentes y Enfermedades** (incl. GMM) | $188,948 | **18.4%** | +11.4% |
+| **Daños (sin Autos)** | $158,795 | **15.5%** | +12.1% |
+| **Pensiones** | $45,827 | **4.5%** | +18.8% |
 
-*Fuente: CNSF / Deloitte SLATAM, datos al 4T 2024.*
+*Fuente: AMIS, EstadísticAMIS Q4 2025.*
 
 **Observaciones clave:**
-- **Vida** domina el portafolio con más del 40%, impulsado por seguros grupales y bancaseguros
-- **Autos** creció de 19.7% a 21.3% en un año, con Quálitas como líder indiscutible (34.1% del ramo)
-- **Daños sin autos** (14.5%) es el ramo donde se ubica **Responsabilidad Civil** — foco principal de este estudio
-- **GMM** representa la mayor parte de Accidentes y Enfermedades, con GNP liderando con >24% de market share
+- **Vida** mantiene el liderazgo con ~41% del portafolio, impulsado por seguros grupales y bancaseguros
+- **Daños sin autos** gana peso (de 14.5% a **15.5%**), confirmando la expansión de líneas comerciales y especializadas — ramo donde se ubica **Responsabilidad Civil**, foco principal de este estudio
+- **Pensiones** fue el ramo de mayor crecimiento (+18.8%), impulsado por ProFuturo GNP (+60.1%)
+- **GMM** representa la mayor parte de Accidentes y Enfermedades, con GNP liderando con ~26% de market share
+- **Autos** desacelera (de +26.3% a +9.9%) tras un 2024 excepcional, con Quálitas estable en ~34%
 
 ---
 
 ## 4. Ranking de Aseguradoras — Top 10
 
-Al primer trimestre de 2024 (último ranking público disponible con detalle individual):
+Al cierre de 2025 (datos acumulados anuales):
 
-| Posición | Aseguradora | Market share (%) |
-|----------|-------------|-----------------|
-| 1 | **GNP (Grupo Nacional Provincial)** | 12.49% |
-| 2 | **MetLife México** | 10.84% |
-| 3 | **BBVA Seguros** | 9.75% |
-| 4 | **Seguros Banorte** | 7.80% |
-| 5 | **AXA Seguros** | 7.21% |
-| 6-10 | Citibanamex Seguros, Quálitas, Mapfre, Zurich, Chubb | — |
+| Posición | Aseguradora | Prima directa (MXN M) | Market share (%) | Crec. YoY |
+|----------|-------------|----------------------|-----------------|-----------|
+| 1 | **GNP** | $128,430 | **12.53%** | +10.3% |
+| 2 | **BBVA Seguros** | $91,085 | **8.89%** | +18.1% |
+| 3 | **MetLife México** | $90,255 | **8.81%** | +7.1% |
+| 4 | **Quálitas** | $71,972 | **7.02%** | +9.2% |
+| 5 | **AXA Seguros** | $65,208 | **6.36%** | +5.5% |
+| 6 | Banorte | $58,716 | 5.73% | +29.3% |
+| 7 | Banamex Seguros | $51,948 | 5.07% | -7.6% |
+| 8 | Monterrey New York Life | $45,794 | 4.47% | +6.5% |
+| 9 | Mapfre México | $38,852 | 3.79% | +21.8% |
+| 10 | Allianz México | $32,379 | 3.16% | +28.1% |
 
-*Fuente: Rankings LATAM / CNSF, datos a marzo 2024.*
+*Fuente: AMIS, EstadísticAMIS Q4 2025.*
 
-**Dinámica de participación:** Las "5 grandes" concentran ~44.2% del primaje total. Seguros Banorte fue la que más creció en participación (+2.21 pp), seguida de Citibanamex (+1.55 pp) y BBVA (+1.32 pp). El canal de bancaseguros impulsa fuertemente a estas tres (Fuente: El Asegurador, junio 2024).
+**Dinámica de participación:** Las "5 grandes" concentran **43.6%** del primaje total (vs 44.2% en 2024). Banorte fue la de mayor crecimiento entre las top 10 (+29.3%), seguida de Allianz (+28.1%) y Mapfre (+21.8%). Banamex fue la única del top 10 que decreció (-7.6%). Las 15 medianas crecieron 11.8%, ligeramente por encima del mercado.
 
 **Líderes por ramo:**
-- **Autos:** Quálitas (34.1%)
-- **GMM:** GNP (>24%)
-- **Vida:** MetLife, GNP, BBVA
-- **Daños:** AXA, Chubb, Zurich, GNP (mercado más fragmentado)
+- **Autos:** Quálitas (19.4% de Daños total; ~34% de Autos)
+- **GMM:** GNP (~26% individual, ~22% colectivo)
+- **Vida:** BBVA (16.7%), MetLife (13.2%), Banamex (12.1%)
+- **Daños (sin Autos):** GNP, Chubb, AXA, Mapfre (mercado fragmentado)
 
 ---
 
@@ -193,17 +195,18 @@ Al primer trimestre de 2024 (último ranking público disponible con detalle ind
 ## 8. GMM — Gastos Médicos Mayores
 
 ### Dimensión
-- **Prima directa (A&E total, 2024):** $169,654 M MXN (18.7% del sector)
-- **GMM específico:** $158,266 M MXN
-- **Crecimiento YoY:** +13.8%
-- **Siniestros pagados:** $122,278 M MXN (+106% en 5 años)
+- **Prima directa (A&E total, 2025):** $188,948 M MXN (18.4% del sector, +11.4% YoY)
+- **GMM específico:** $177,180 M MXN (+11.9% YoY)
+  - GMM Individual: $87,718 M (+10.7%)
+  - GMM Colectivo: $89,462 M (+13.3%)
 - **Personas aseguradas:** ~14 millones (~10% de la población)
+- **Sura en GMM:** posición 19 individual ($193 M, 0.22%) / posición 14 colectivo ($786 M, 0.88%)
 
 ### Líderes del mercado
 | Segmento | #1 | #2 | #3 |
 |----------|----|----|-----|
-| **GMM Individual** | GNP (~29.7%) | AXA (~22%) | MetLife (~11%) |
-| **GMM Colectivo** | MetLife (~24.7%) | GNP (~23.9%) | AXA (~16.2%) |
+| **GMM Individual** | GNP (30.2%) | AXA (22.7%) | Monterrey NYL (13.3%) |
+| **GMM Colectivo** | MetLife (32.5%) | GNP (21.9%) | AXA (12.5%) |
 
 ### Presiones críticas
 - **Inflación médica** de 14.9% (2025) vs inflación general 3.9% — la brecha más grande de la década
@@ -222,24 +225,24 @@ Al primer trimestre de 2024 (último ranking público disponible con detalle ind
 ## 9. Autos
 
 ### Dimensión
-- **Prima directa (2024):** $193,217 M MXN (21.3% del sector)
-- **Crecimiento nominal YoY:** +26.3% (mayor crecimiento relativo de todos los ramos)
-- **Índice combinado industria:** 94.9% (mejora de 442 pb vs 2023)
+- **Prima directa (2025):** $212,351 M MXN (20.7% del sector, incluye Autos dentro de Daños Total)
+- **Crecimiento nominal YoY:** +9.9% (desaceleración vs +26.3% en 2024)
+- **Sura en Autos:** $2,201 M MXN, crecimiento +10.6%, posición fuera del top 15
 
-### Líderes del mercado
-| Posición | Aseguradora | Market share |
-|----------|-------------|-------------|
-| 1 | **Quálitas** | **34.1%** |
-| 2 | AXA | ~10–12% |
-| 3 | GNP | ~8–9% |
-| 4 | HDI | ~7–8% |
-| 5 | Chubb | ~5–6% |
+### Líderes del mercado (Daños Total incluyendo Autos)
+| Posición | Aseguradora | Prima (MXN M) | Market share |
+|----------|-------------|--------------|-------------|
+| 1 | **Quálitas** | $71,972 | **19.4%** |
+| 2 | GNP | $38,627 | 10.4% |
+| 3 | Chubb | $28,197 | 7.6% |
+| 4 | AXA | $27,085 | 7.3% |
+| 5 | BBVA | $20,550 | 5.5% |
 
 ### Características del ramo
-- **Quálitas domina** con un tercio del mercado — liderazgo por escala y red de ajustadores
-- Las top 5 crecieron 30.7% vs 15.3% de las medianas — tendencia de consolidación
+- **Quálitas sigue dominando** el ramo automotriz (~34% de Autos), con crecimiento de 9.2%
+- Las top 5 crecieron 11.1% vs 14.7% de las medianas — las medianas recuperan terreno
+- Agroasemex tuvo el mayor crecimiento del ramo (+117.7%), seguido de Allianz (+19.8%)
 - **Canal digital** en aceleración: comparadores (Rastreator, miituo) transforman la distribución
-- GNP obtuvo la mejor calificación PROFECO (9.6/10)
 
 ### Tendencias
 - Telemática / UBI (Usage-Based Insurance)
@@ -252,24 +255,27 @@ Al primer trimestre de 2024 (último ranking público disponible con detalle ind
 ## 10. Vida
 
 ### Dimensión
-- **Prima directa (2024):** $375,511 M MXN (41.3% del sector — ramo más grande)
-- **Pólizas vigentes:** ~58 millones
-- **Penetración:** ~25% de la población con algún seguro de vida
+- **Prima directa (2025):** $419,079 M MXN (40.9% del sector — ramo más grande, +11.5% YoY)
+  - Vida Individual: $318,916 M (+13.7%)
+  - Vida Gpo y Col: $100,163 M (+5.0%)
+- **Sura en Vida:** $1,144 M MXN (posición 26 total), participación 0.27%, con -9.2% de decrecimiento
+  - Vida Gpo y Col: $1,086 M (posición 19 en Vida Gpo y Col, 1.1% part.)
 
 ### Líderes del mercado
-| Posición | Aseguradora | Segmento dominante |
-|----------|-------------|-------------------|
-| 1 | **MetLife** (~16–17%) | Individual + grupal |
-| 2 | **BBVA Seguros** (~14–15%) | Bancaseguros |
-| 3 | **GNP** (~10–11%) | Individual premium |
-| 4 | **Citibanamex** (~10%) | Bancaseguros |
-| 5 | **Banorte** (~8–9%) | Bancaseguros |
+| Posición | Aseguradora | Prima (MXN M) | Part. en Vida Total | Crec. YoY |
+|----------|-------------|--------------|--------------------|-----------| 
+| 1 | **BBVA** | $69,955 | **16.7%** | +19.2% |
+| 2 | **MetLife** | $55,268 | **13.2%** | +0.8% |
+| 3 | **Banamex** | $50,845 | **12.1%** | -7.8% |
+| 4 | **GNP** | $43,084 | **10.3%** | +9.0% |
+| 5 | **Banorte** | $37,338 | **8.9%** | +38.9% |
 
 ### Características del ramo
-- **Bancaseguros domina** (~40–45% de la prima): BBVA, Banorte, Citibanamex
-- Vida crédito/desgravamen representa un volumen masivo de bajo ticket
-- Las 4 primeras aseguradoras concentran ~50% del ramo
-- Productos de inversión (unit-linked) compiten con instrumentos financieros puros
+- **Bancaseguros domina** (~61% de prima de las 5 grandes): BBVA, Banorte, Banamex
+- BBVA supera a MetLife como líder del ramo con $70,000 M (+19.2%)
+- Banorte fue la de mayor crecimiento entre las grandes (+38.9%)
+- Banamex fue la única grande en decrecer (-7.8%), perdiendo posiciones
+- Las 5 grandes concentran 61.2% del ramo, con un crecimiento de 9.1%
 
 ### Tendencias
 - Seguros híbridos (vida + ahorro + inversión)
@@ -283,10 +289,12 @@ Al primer trimestre de 2024 (último ranking público disponible con detalle ind
 
 > **Documento completo:** Ver `analisis/danos.md`
 
-- **Prima directa (2024):** $131,819 M MXN (14.5% del sector)
-- **Composición:** Incendio y líneas aliadas, Terremoto, Transporte, Crédito y Caución, Agrícola, Misceláneos, **Responsabilidad Civil**
-- **Mercado más fragmentado** que Vida, GMM o Autos — no hay un líder claro con >15%
-- **Principales jugadores:** AXA, Chubb, Zurich, GNP, Mapfre, HDI
+- **Prima directa Daños Total (2025):** $371,147 M MXN (+12.1% YoY)
+- **Prima directa Daños sin Autos (2025):** $158,795 M MXN (15.5% del sector)
+- **Composición Daños sin Autos:** Incendio ($33,903 M), Riesgos Catastróficos ($38,760 M), Transporte ($23,283 M), Diversos ($37,283 M), RC ($21,862 M), Crédito ($2,399 M), Agrícola ($524 M)
+- **Mercado fragmentado** — top 5 en Daños: Quálitas (19.4%), GNP (10.4%), Chubb (7.6%), AXA (7.3%), BBVA (5.5%)
+- **Sura en Daños:** posición 19, $4,682 M MXN (1.26% de Daños Total), crecimiento +10.6%
+- **Principales jugadores en Daños sin Autos:** GNP, Chubb, AXA, Mapfre, Inbursa
 - **Canal dominante:** Brokers especializados y agentes corporativos
 - RC es el subramo de mayor interés estratégico dentro de Daños (ver Parte II)
 
@@ -304,21 +312,21 @@ Al primer trimestre de 2024 (último ranking público disponible con detalle ind
 
 ## Resumen del Portafolio Sura
 
-| Ramo | Evaluación | Comentario |
-|------|-----------|------------|
-| **GMM** | ✅ Competitivo | Ala Azul / Ala Azul Plus. SA máx $50M (mercado ofrece ilimitada) |
-| **Autos** | ✅ Competitivo | 4 niveles de cobertura + flotillas. Participación <3% |
-| **Vida** | ⚠️ Presente pero menor | Individual y grupo disponibles. Sin vida crédito ni canal bancario |
-| **Daños tradicionales** | ✅ Sólido | Plan Empresario SURA cubre incendio, terremoto, transporte, robo |
-| **RC General** | ✅ Tiene | RC Daños a Terceros con multirriesgo |
-| **RC Profesional (E&O)** | ❌ No detectado | Brecha importante |
-| **D&O** | ⚠️ Limitado | No catalogado públicamente; posible vía reaseguro |
-| **RC Producto** | ⚠️ Limitado | Solo como endoso dentro de RC General |
-| **RC Ambiental** | ⚠️ Limitado | Solo contaminación accidental, no gradual |
-| **RC Cyber** | ✅ Tiene | Seguro de Protección Cibernética — producto completo 1st + 3rd party |
-| **CAR/EAR** | ✅ Tiene | Seguro de Ingeniería |
-| **RC Transporte** | ✅ Tiene | Cobertura de carga en tránsito |
-| **RC Patronal** | ⚠️ Limitado | Como endoso, no producto dedicado |
+| Ramo | Evaluación | Prima 2025 (MXN M) | Part. mercado | Comentario |
+|------|-----------|-------------------|--------------|------------|
+| **GMM** | ✅ Competitivo | $979 | 0.55% (pos. 15) | Ala Azul / Ala Azul Plus. SA máx $50M (mercado ofrece ilimitada). Creció 30.8% vs mercado |
+| **Autos** | ✅ Competitivo | $2,201 | ~1.0% | 4 niveles de cobertura + flotillas |
+| **Vida** | ⚠️ Presente pero menor | $1,144 | 0.27% (pos. 26) | Decreció -9.2%. Sin vida crédito ni canal bancario |
+| **Daños tradicionales** | ✅ Sólido | $2,481 (incendio+CAT+transporte+diversos) | ~1.6% Daños sin autos | Plan Empresario SURA cubre incendio, terremoto, transporte, robo |
+| **RC General** | ✅ Tiene | $309 (RC y RP) | 0.47% del subramo | RC Daños a Terceros con multirriesgo |
+| **RC Profesional (E&O)** | ❌ No detectado | — | — | Brecha importante |
+| **D&O** | ⚠️ Limitado | — | — | No catalogado públicamente; posible vía reaseguro |
+| **RC Producto** | ⚠️ Limitado | — | — | Solo como endoso dentro de RC General |
+| **RC Ambiental** | ⚠️ Limitado | — | — | Solo contaminación accidental, no gradual |
+| **RC Cyber** | ✅ Tiene | — | — | Seguro de Protección Cibernética — producto completo 1st + 3rd party |
+| **CAR/EAR** | ✅ Tiene | — | — | Seguro de Ingeniería |
+| **RC Transporte** | ✅ Tiene | $358 | — | Cobertura de carga en tránsito |
+| **RC Patronal** | ⚠️ Limitado | — | — | Como endoso, no producto dedicado |
 
 ### Brechas Estratégicas de Sura
 
@@ -331,6 +339,19 @@ Al primer trimestre de 2024 (último ranking público disponible con detalle ind
 | **RC Patronal dedicada** | Media | Litigiosidad laboral creciente |
 | **Autos eléctricos** | Baja | Nicho emergente |
 
+### Posicionamiento Cuantitativo de Sura (2025)
+
+| Indicador | Valor | Variación YoY |
+|-----------|-------|--------------|
+| **Prima directa total** | **$7,011 M MXN** | **+8.3%** |
+| Posición mercado total | 25 de 201 | — |
+| Participación mercado total | 0.72% | vs 0.74% en 2024 |
+| Participación en Autonomía (sin bancos) | 0.70% | vs 0.86% en 2024 |
+| Crecimiento mercado total | +11.6% | — |
+| Crecimiento SURA | +8.3% | Por debajo del mercado |
+
+**Nota:** Sura creció por debajo del mercado (8.3% vs 11.6%), lo que resultó en una ligera pérdida de participación (de 0.74% a 0.72%). El ramo de mayor crecimiento para Sura fue GMM Colectivo (+30.8%), mientras que Vida decreció (-9.2%).
+
 ### Ventajas Competitivas de Sura
 
 1. **Presencia fuerte en PyMEs** — segmento desatendido en RC especializado
@@ -338,6 +359,7 @@ Al primer trimestre de 2024 (último ranking público disponible con detalle ind
 3. **Producto Cyber competitivo** — sorprendentemente completo vs mercado
 4. **Marca regional LATAM** — credibilidad para multinacionales del nearshoring
 5. **Cross-selling** — base de clientes en Daños/Autos puede ser canal para RC especializado
+6. **GMM Colectivo en crecimiento** — el ramo de Sura con mayor dinamismo (+30.8%), posición 14 del mercado
 
 ---
 
@@ -364,4 +386,4 @@ Al primer trimestre de 2024 (último ranking público disponible con detalle ind
 ---
 
 **Aldebaran Consulting — Market Intelligence**
-**Versión:** 1.0 | **Fecha:** Marzo 2026 | **Fuentes:** 58+ documentadas en `referencias/fuentes.md`
+**Versión:** 2.0 | **Fecha:** Abril 2026 | **Fuentes:** 58+ documentadas en `referencias/fuentes.md` | **Datos:** AMIS EstadísticAMIS Q4 2025, CNSF Primas por Estado Q4 2025, Participación SURA Q4 2025, Resultados AMIS Q4 2025
