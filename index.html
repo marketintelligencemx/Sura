@@ -282,7 +282,7 @@ function handleLogin(e) {
     // Set session token
     sessionStorage.setItem('aldebaran_auth', 'true');
     sessionStorage.setItem('aldebaran_ts', Date.now().toString());
-    window.location.href = 'estudio.html';
+    window.location.href = 'dashboard.html';
   } else {
     err.classList.remove('visible');
     void err.offsetWidth; // trigger reflow for animation
@@ -298,7 +298,7 @@ if (sessionStorage.getItem('aldebaran_auth') === 'true') {
   var ts = parseInt(sessionStorage.getItem('aldebaran_ts') || '0');
   // Session valid for 8 hours
   if (Date.now() - ts < 8 * 60 * 60 * 1000) {
-    window.location.href = 'estudio.html';
+    window.location.href = 'dashboard.html';
   } else {
     sessionStorage.removeItem('aldebaran_auth');
     sessionStorage.removeItem('aldebaran_ts');

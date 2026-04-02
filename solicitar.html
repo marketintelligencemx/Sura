@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitar An&aacute;lisis — Aldebaran Consulting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function() {
+      var auth = sessionStorage.getItem('aldebaran_auth');
+      var ts = parseInt(sessionStorage.getItem('aldebaran_ts') || '0');
+      if (auth !== 'true' || (Date.now() - ts) > 8 * 60 * 60 * 1000) {
+        window.location.replace('index.html');
+      }
+    })();
+  </script>
+  <style>
+    :root {
+      --black: #1A1A1A; --dark: #2D2D2D; --white: #FFFFFF; --cream: #F5F3EF;
+      --gray: #666666; --gray-light: #999999; --gray-border: #E0DDDA;
+      --red: #E63329; --blue: #2563EB; --green: #059669;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Montserrat', sans-serif; background: var(--cream); color: var(--dark); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+    nav {
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-border); padding: 0 2.5rem; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--black); display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+    .nav-brand span { color: var(--red); }
+    .nav-brand img { height: 26px; }
+    .back-link { font-size: 0.8rem; font-weight: 600; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--blue); }
+
+    .container { max-width: 680px; margin: 0 auto; padding: 3.5rem 2rem 4rem; }
+
+    .page-header { margin-bottom: 2.5rem; }
+    .page-eyebrow { font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--blue); margin-bottom: 0.75rem; }
+    .page-header h1 { font-family: 'Anton', sans-serif; font-size: 2rem; color: var(--black); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .page-header p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; }
+
+    /* Form */
+    .form-card {
+      background: var(--white); border-radius: 10px; padding: 2.5rem;
+      border: 1px solid var(--gray-border);
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-group label {
+      display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--gray); margin-bottom: 0.4rem;
+    }
+    .form-group label .required { color: var(--red); }
+
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 0.75rem 1rem; font-family: 'Montserrat', sans-serif;
+      font-size: 0.88rem; font-weight: 500; color: var(--black);
+      background: var(--cream); border: 1.5px solid var(--gray-border); border-radius: 6px;
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.08);
+    }
+    .form-group textarea { min-height: 120px; resize: vertical; line-height: 1.6; }
+    .form-group select { cursor: pointer; appearance: auto; }
+
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--gray-light); font-weight: 400; }
+
+    /* Quick-select chips */
+    .chip-group { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+    .chip {
+      font-size: 0.75rem; font-weight: 600; padding: 0.35rem 0.75rem; border-radius: 20px;
+      background: var(--cream); border: 1.5px solid var(--gray-border); color: var(--gray);
+      cursor: pointer; transition: all 0.2s; user-select: none;
+    }
+    .chip:hover { border-color: var(--blue); color: var(--blue); }
+    .chip.active { background: rgba(37,99,235,0.08); border-color: var(--blue); color: var(--blue); }
+
+    .btn-submit {
+      width: 100%; padding: 0.9rem; font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--white); background: var(--blue);
+      border: none; border-radius: 6px; cursor: pointer; transition: background 0.2s, transform 0.1s;
+      margin-top: 0.5rem;
+    }
+    .btn-submit:hover { background: #1d4ed8; }
+    .btn-submit:active { transform: scale(0.98); }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* Success state */
+    .success-state {
+      display: none; text-align: center; padding: 3rem 1.5rem;
+    }
+    .success-state.visible { display: block; }
+    .success-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .success-state h2 { font-family: 'Poppins', sans-serif; font-size: 1.3rem; color: var(--black); margin-bottom: 0.5rem; }
+    .success-state p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; margin-bottom: 2rem; }
+    .btn-back {
+      display: inline-block; padding: 0.7rem 1.5rem; font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--blue); background: rgba(37,99,235,0.08); border: none; border-radius: 6px;
+      cursor: pointer; text-decoration: none; transition: background 0.2s;
+    }
+    .btn-back:hover { background: rgba(37,99,235,0.15); }
+
+    .error-msg {
+      display: none; text-align: center; font-size: 0.82rem; font-weight: 600;
+      color: var(--red); margin-top: 1rem; padding: 0.6rem;
+      background: rgba(230,51,41,0.06); border-radius: 6px;
+    }
+    .error-msg.visible { display: block; }
+
+    @media (max-width: 600px) {
+      .container { padding: 2rem 1.25rem; }
+      .form-card { padding: 1.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      nav { padding: 0 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="dashboard.html" class="nav-brand"><img src="logo.svg" alt="Aldebaran">Aldebaran<span>.</span> Consulting</a>
+  <a href="dashboard.html" class="back-link">&larr; Volver al centro</a>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <div class="page-eyebrow">Solicitar An&aacute;lisis</div>
+    <h1>Pedir M&aacute;s Informaci&oacute;n</h1>
+    <p>Describe lo que necesitas y nuestro equipo de investigaci&oacute;n preparar&aacute; un an&aacute;lisis a la medida. Las solicitudes se atienden en orden de recepci&oacute;n.</p>
+  </div>
+
+  <div class="form-card">
+    <!-- Form -->
+    <form id="requestForm" onsubmit="return handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre <span class="required">*</span></label>
+          <input type="text" id="nombre" placeholder="Tu nombre completo" required>
+        </div>
+        <div class="form-group">
+          <label>Empresa</label>
+          <input type="text" id="empresa" placeholder="Nombre de la empresa" value="Seguros SURA">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Email <span class="required">*</span></label>
+        <input type="email" id="email" placeholder="tu@email.com" required>
+      </div>
+
+      <div class="form-group">
+        <label>Tipo de solicitud <span class="required">*</span></label>
+        <select id="tipo" required>
+          <option value="" disabled selected>Selecciona una opci&oacute;n</option>
+          <option value="Profundización por ramo">Profundizaci&oacute;n por ramo (GMM, Autos, Vida, Da&ntilde;os)</option>
+          <option value="Análisis de competidor">An&aacute;lisis de competidor espec&iacute;fico</option>
+          <option value="Análisis geográfico">An&aacute;lisis geogr&aacute;fico (estado o zona)</option>
+          <option value="Análisis de RC / subramo">An&aacute;lisis de Responsabilidad Civil / subramo</option>
+          <option value="Benchmark operativo">Benchmark operativo (SLAs, IDATU, eficiencia)</option>
+          <option value="Oportunidad de producto">Evaluaci&oacute;n de oportunidad de producto</option>
+          <option value="Datos financieros">Datos financieros / siniestralidad detallada</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Temas de inter&eacute;s r&aacute;pido</label>
+        <div class="chip-group">
+          <span class="chip" onclick="toggleChip(this)">RC Cyber</span>
+          <span class="chip" onclick="toggleChip(this)">E&amp;O / D&amp;O</span>
+          <span class="chip" onclick="toggleChip(this)">RC Ambiental</span>
+          <span class="chip" onclick="toggleChip(this)">Nearshoring</span>
+          <span class="chip" onclick="toggleChip(this)">PyMEs</span>
+          <span class="chip" onclick="toggleChip(this)">Canal agente</span>
+          <span class="chip" onclick="toggleChip(this)">Bancaseguros</span>
+          <span class="chip" onclick="toggleChip(this)">Siniestralidad</span>
+          <span class="chip" onclick="toggleChip(this)">CONDUSEF</span>
+          <span class="chip" onclick="toggleChip(this)">Nuevo Le&oacute;n</span>
+          <span class="chip" onclick="toggleChip(this)">Jalisco</span>
+          <span class="chip" onclick="toggleChip(this)">Chubb</span>
+          <span class="chip" onclick="toggleChip(this)">AIG</span>
+          <span class="chip" onclick="toggleChip(this)">HDI</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Detalle de la solicitud <span class="required">*</span></label>
+        <textarea id="detalle" placeholder="Describe lo que necesitas con el mayor detalle posible. Por ejemplo: 'Quiero un comparativo de siniestralidad entre Sura, Chubb y AXA en el ramo de Daños para los últimos 3 años, desglosado por subramo.'" required></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit" id="btnSubmit">Enviar Solicitud</button>
+      <div class="error-msg" id="errorMsg">Error al enviar. Intenta de nuevo.</div>
+    </form>
+
+    <!-- Success -->
+    <div class="success-state" id="successState">
+      <div class="success-icon">&#10003;</div>
+      <h2>Solicitud Enviada</h2>
+      <p>Tu solicitud ha sido registrada exitosamente. El equipo de investigaci&oacute;n la revisar&aacute; y te contactar&aacute; al email proporcionado con el an&aacute;lisis.</p>
+      <a href="dashboard.html" class="btn-back">&larr; Volver al centro</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Supabase config
+var SUPABASE_URL = 'https://rfwsrgwogmtyrtzyyagi.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJmd3NyZ3dvZ210eXJ0enl5YWdpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUwOTYyNzAsImV4cCI6MjA5MDY3MjI3MH0.RaAvYTCiBF0rLmyJlkWg23o5jyx6iD18AlAbY9HZs2M';
+
+function toggleChip(el) {
+  el.classList.toggle('active');
+}
+
+function getSelectedChips() {
+  var chips = document.querySelectorAll('.chip.active');
+  var arr = [];
+  chips.forEach(function(c) { arr.push(c.textContent); });
+  return arr.join(', ');
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  var btn = document.getElementById('btnSubmit');
+  var err = document.getElementById('errorMsg');
+  err.classList.remove('visible');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  var chips = getSelectedChips();
+  var detalle = document.getElementById('detalle').value;
+  if (chips) {
+    detalle = '[Temas: ' + chips + '] ' + detalle;
+  }
+
+  var payload = {
+    nombre: document.getElementById('nombre').value,
+    empresa: document.getElementById('empresa').value,
+    email: document.getElementById('email').value,
+    tipo: document.getElementById('tipo').value,
+    detalle: detalle,
+    estado: 'pendiente'
+  };
+
+  fetch(SUPABASE_URL + '/rest/v1/solicitudes', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('requestForm').style.display = 'none';
+      document.getElementById('successState').classList.add('visible');
+    } else {
+      throw new Error('HTTP ' + res.status);
+    }
+  })
+  .catch(function(error) {
+    console.error('Supabase error:', error);
+    err.classList.add('visible');
+    btn.disabled = false;
+    btn.textContent = 'Enviar Solicitud';
+  });
+
+  return false;
+}
+</script>
+
+</body>
+</html>

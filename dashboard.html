@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Aldebaran Consulting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function() {
+      var auth = sessionStorage.getItem('aldebaran_auth');
+      var ts = parseInt(sessionStorage.getItem('aldebaran_ts') || '0');
+      if (auth !== 'true' || (Date.now() - ts) > 8 * 60 * 60 * 1000) {
+        sessionStorage.removeItem('aldebaran_auth');
+        sessionStorage.removeItem('aldebaran_ts');
+        window.location.replace('index.html');
+      }
+    })();
+  </script>
+  <style>
+    :root {
+      --black: #1A1A1A; --dark: #2D2D2D; --white: #FFFFFF; --cream: #F5F3EF;
+      --gray: #666666; --gray-light: #999999; --gray-border: #E0DDDA;
+      --red: #E63329; --blue: #2563EB; --amber: #B45309; --green: #059669;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Montserrat', -apple-system, sans-serif;
+      background: var(--cream); color: var(--dark);
+      min-height: 100vh; -webkit-font-smoothing: antialiased;
+    }
+
+    /* Nav */
+    nav {
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-border); padding: 0 2.5rem; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--black);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-brand span { color: var(--red); }
+    .nav-brand img { height: 26px; }
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-user { font-size: 0.8rem; color: var(--gray); font-weight: 500; }
+    .btn-logout {
+      font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray);
+      background: none; border: 1.5px solid var(--gray-border); border-radius: 4px;
+      padding: 0.35rem 0.75rem; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-logout:hover { color: var(--red); border-color: var(--red); }
+
+    /* Content */
+    .dash-container {
+      max-width: 960px; margin: 0 auto; padding: 4rem 2rem;
+    }
+    .dash-header {
+      text-align: center; margin-bottom: 3.5rem;
+    }
+    .dash-eyebrow {
+      font-weight: 700; font-size: 0.72rem; text-transform: uppercase;
+      letter-spacing: 0.18em; color: var(--red); margin-bottom: 1rem;
+    }
+    .dash-header h1 {
+      font-family: 'Anton', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--black); text-transform: uppercase; line-height: 1.1; margin-bottom: 0.75rem;
+    }
+    .dash-header p {
+      color: var(--gray); font-size: 0.95rem; max-width: 520px; margin: 0 auto; line-height: 1.7;
+    }
+
+    /* Cards */
+    .dash-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .dash-card {
+      background: var(--white); border-radius: 10px; padding: 2.25rem 2rem;
+      border: 1px solid var(--gray-border); transition: all 0.25s;
+      text-decoration: none; color: inherit; display: block; position: relative;
+      overflow: hidden;
+    }
+    .dash-card:hover {
+      border-color: transparent;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+      transform: translateY(-3px);
+    }
+    .dash-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    }
+    .dash-card.card-estudio::before { background: var(--red); }
+    .dash-card.card-solicitar::before { background: var(--blue); }
+    .dash-card.card-calculadora::before { background: var(--green); }
+
+    .card-icon {
+      width: 48px; height: 48px; border-radius: 10px; display: flex;
+      align-items: center; justify-content: center; margin-bottom: 1.25rem;
+      font-size: 1.4rem;
+    }
+    .card-estudio .card-icon { background: rgba(230,51,41,0.08); }
+    .card-solicitar .card-icon { background: rgba(37,99,235,0.08); }
+    .card-calculadora .card-icon { background: rgba(5,150,105,0.08); }
+
+    .dash-card h3 {
+      font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700;
+      color: var(--black); margin-bottom: 0.5rem;
+    }
+    .dash-card p {
+      font-size: 0.85rem; color: var(--gray); line-height: 1.65; margin-bottom: 1.25rem;
+    }
+    .card-action {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.4rem;
+    }
+    .card-estudio .card-action { color: var(--red); }
+    .card-solicitar .card-action { color: var(--blue); }
+    .card-calculadora .card-action { color: var(--green); }
+
+    .dash-card:hover .card-action { gap: 0.7rem; }
+
+    /* Tags */
+    .card-tag {
+      display: inline-block; font-size: 0.65rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; padding: 0.2rem 0.5rem;
+      border-radius: 3px; margin-bottom: 1rem;
+    }
+    .tag-principal { background: rgba(230,51,41,0.08); color: var(--red); }
+    .tag-nuevo { background: rgba(37,99,235,0.08); color: var(--blue); }
+    .tag-herramienta { background: rgba(5,150,105,0.08); color: var(--green); }
+
+    /* Footer */
+    .dash-footer {
+      text-align: center; margin-top: 4rem; font-size: 0.75rem; color: var(--gray-light);
+    }
+    .dash-footer strong { color: var(--gray); }
+
+    @media (max-width: 600px) {
+      .dash-container { padding: 2.5rem 1.25rem; }
+      nav { padding: 0 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand"><img src="logo.svg" alt="Aldebaran">Aldebaran<span>.</span> Consulting</div>
+  <div class="nav-right">
+    <span class="nav-user">Sesi&oacute;n activa</span>
+    <button class="btn-logout" onclick="sessionStorage.clear();window.location='index.html'">Cerrar sesi&oacute;n</button>
+  </div>
+</nav>
+
+<div class="dash-container">
+  <div class="dash-header">
+    <div class="dash-eyebrow">Market Intelligence</div>
+    <h1>Centro de An&aacute;lisis</h1>
+    <p>Estudio de mercado del sector asegurador mexicano, herramientas de an&aacute;lisis y canal de solicitudes.</p>
+  </div>
+
+  <div class="dash-grid">
+
+    <!-- Estudio -->
+    <a href="estudio.html" class="dash-card card-estudio">
+      <div class="card-tag tag-principal">Principal</div>
+      <div class="card-icon">&#128202;</div>
+      <h3>Estudio de Mercado</h3>
+      <p>Sector asegurador M&eacute;xico Q4 2025 &mdash; panorama macro, an&aacute;lisis por ramo, RC, SLAs, posicionamiento Sura y playbook estrat&eacute;gico.</p>
+      <div class="card-action">Abrir estudio &#8594;</div>
+    </a>
+
+    <!-- Solicitar -->
+    <a href="solicitar.html" class="dash-card card-solicitar">
+      <div class="card-tag tag-nuevo">Nuevo</div>
+      <div class="card-icon">&#128172;</div>
+      <h3>Solicitar An&aacute;lisis</h3>
+      <p>Solicita profundizaci&oacute;n en un ramo, estado, competidor o tema espec&iacute;fico. Tu solicitud llega directamente al equipo de investigaci&oacute;n.</p>
+      <div class="card-action">Crear solicitud &#8594;</div>
+    </a>
+
+    <!-- Calculadora -->
+    <a href="calculadora.html" class="dash-card card-calculadora">
+      <div class="card-tag tag-herramienta">Herramienta</div>
+      <div class="card-icon">&#9889;</div>
+      <h3>Calculadora de Oportunidad</h3>
+      <p>Selecciona un subramo de RC, un segmento y calcula el mercado potencial, penetraci&oacute;n actual y competidores.</p>
+      <div class="card-action">Explorar &#8594;</div>
+    </a>
+
+  </div>
+
+  <div class="dash-footer">
+    <strong>Aldebaran Consulting</strong> &mdash; Market Intelligence &bull; Abril 2026 &bull; Versi&oacute;n 2.0
+  </div>
+</div>
+
+</body>
+</html>

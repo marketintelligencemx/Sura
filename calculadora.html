@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Oportunidad RC &mdash; Aldebaran Consulting</title>
+  <script>
+    (function() {
+      var auth = sessionStorage.getItem('aldebaran_auth');
+      var ts = parseInt(sessionStorage.getItem('aldebaran_ts') || '0');
+      if (auth !== 'true' || (Date.now() - ts) > 8 * 60 * 60 * 1000) {
+        sessionStorage.removeItem('aldebaran_auth');
+        sessionStorage.removeItem('aldebaran_ts');
+        window.location.replace('index.html');
+      }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #1A1A1A;
+      --dark: #2D2D2D;
+      --white: #FFFFFF;
+      --cream: #F5F3EF;
+      --gray: #666666;
+      --gray-light: #999999;
+      --gray-border: #E0DDDA;
+      --red: #E63329;
+      --red-dark: #C42B22;
+      --red-light: rgba(230, 51, 41, 0.06);
+      --blue: #2563EB;
+      --amber: #B45309;
+      --green: #059669;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--dark);
+      background: var(--cream);
+      font-size: 16px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 2.5rem;
+      display: flex; align-items: center; justify-content: space-between; height: 56px;
+    }
+    .nav-brand {
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--black);
+      display: flex; align-items: center; gap: 0.5rem; text-decoration: none;
+    }
+    .nav-brand span { color: var(--red); }
+    .nav-logo { height: 26px; width: auto; }
+    .nav-links { display: flex; gap: 0; list-style: none; align-items: center; }
+    .nav-links a {
+      color: var(--gray); text-decoration: none; font-size: 0.75rem; font-weight: 600;
+      padding: 0.4rem 0.7rem; text-transform: uppercase; letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--black);
+      padding: 8rem 2.5rem 4rem;
+      color: var(--white);
+    }
+    .hero-inner { max-width: 1200px; margin: 0 auto; }
+    .hero-eyebrow {
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.72rem;
+      text-transform: uppercase; letter-spacing: 0.18em; color: var(--red); margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Anton', sans-serif; font-weight: 400;
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      color: var(--white); line-height: 1.08; text-transform: uppercase; max-width: 750px;
+    }
+    .hero-sub {
+      color: rgba(255,255,255,0.55); font-size: 0.95rem; margin-top: 1.5rem; max-width: 580px;
+      line-height: 1.8; font-weight: 400;
+    }
+
+    /* ── Calculator Section ── */
+    .calc-section {
+      max-width: 1200px; margin: 0 auto; padding: 3.5rem 2.5rem 5rem;
+    }
+
+    /* ── Selectors ── */
+    .selectors {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .selector-group label {
+      display: block; font-weight: 700; font-size: 0.72rem;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+    .selector-group select {
+      width: 100%;
+      padding: 0.85rem 1.2rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--black);
+      background: var(--white);
+      border: 2px solid var(--gray-border);
+      border-radius: 8px;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1.2rem center;
+      transition: border-color 0.2s;
+    }
+    .selector-group select:focus {
+      outline: none; border-color: var(--red);
+    }
+
+    /* ── Placeholder ── */
+    .placeholder {
+      text-align: center; padding: 5rem 2rem;
+      color: var(--gray-light); font-size: 0.95rem;
+    }
+    .placeholder-icon {
+      font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;
+    }
+
+    /* ── Result Card ── */
+    .result-card {
+      background: var(--white);
+      border: 1px solid var(--gray-border);
+      border-radius: 12px;
+      overflow: hidden;
+      animation: fadeUp 0.4s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-header {
+      padding: 2rem 2.5rem 1.5rem;
+      border-bottom: 1px solid var(--gray-border);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .result-title {
+      font-family: 'Anton', sans-serif; font-weight: 400;
+      font-size: 1.8rem; text-transform: uppercase; color: var(--black); line-height: 1.1;
+    }
+    .result-segment-badge {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 0.35rem 0.9rem; border-radius: 100px;
+      background: var(--cream); color: var(--gray); border: 1px solid var(--gray-border);
+      white-space: nowrap;
+    }
+
+    /* ── Sura Status Badge ── */
+    .sura-status {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.55rem 1.1rem; border-radius: 8px;
+      font-size: 0.82rem; font-weight: 700; margin-top: 0.8rem;
+    }
+    .sura-status.tiene { background: rgba(5,150,105,0.08); color: var(--green); border: 1px solid rgba(5,150,105,0.2); }
+    .sura-status.limitado { background: rgba(180,83,9,0.08); color: var(--amber); border: 1px solid rgba(180,83,9,0.2); }
+    .sura-status.no-tiene { background: rgba(230,51,41,0.06); color: var(--red); border: 1px solid rgba(230,51,41,0.18); }
+
+    .sura-status-icon {
+      width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800; color: var(--white);
+    }
+    .sura-status.tiene .sura-status-icon { background: var(--green); }
+    .sura-status.limitado .sura-status-icon { background: var(--amber); }
+    .sura-status.no-tiene .sura-status-icon { background: var(--red); }
+
+    /* ── KPI Grid ── */
+    .kpi-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--gray-border);
+    }
+    .kpi-cell {
+      padding: 1.8rem 2.5rem;
+      border-right: 1px solid var(--gray-border);
+    }
+    .kpi-cell:last-child { border-right: none; }
+    .kpi-label {
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--gray-light); margin-bottom: 0.4rem;
+    }
+    .kpi-value {
+      font-family: 'Anton', sans-serif; font-weight: 400;
+      font-size: 1.6rem; color: var(--black); line-height: 1.2;
+    }
+    .kpi-sub {
+      font-size: 0.78rem; color: var(--gray); margin-top: 0.2rem; font-weight: 500;
+    }
+
+    /* ── Penetration Bars ── */
+    .penetration-section {
+      padding: 2rem 2.5rem;
+      border-bottom: 1px solid var(--gray-border);
+    }
+    .penetration-title {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--gray); margin-bottom: 1.2rem;
+    }
+    .bar-row {
+      margin-bottom: 1.2rem;
+    }
+    .bar-row:last-child { margin-bottom: 0; }
+    .bar-label {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 0.4rem;
+    }
+    .bar-label-text { font-size: 0.82rem; font-weight: 600; color: var(--dark); }
+    .bar-label-value { font-size: 0.82rem; font-weight: 700; color: var(--black); }
+    .bar-track {
+      height: 10px; background: var(--cream); border-radius: 100px; overflow: hidden;
+      position: relative;
+    }
+    .bar-fill {
+      height: 100%; border-radius: 100px; transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .bar-fill.current { background: var(--red); }
+    .bar-fill.potential { background: var(--green); }
+    .bar-fill.target { background: var(--blue); opacity: 0.7; }
+
+    /* ── Growth Potential ── */
+    .growth-section {
+      padding: 2rem 2.5rem;
+      border-bottom: 1px solid var(--gray-border);
+      background: linear-gradient(135deg, rgba(5,150,105,0.03), rgba(37,99,235,0.03));
+    }
+    .growth-title {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--green); margin-bottom: 0.8rem;
+    }
+    .growth-grid {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: center;
+    }
+    .growth-block { text-align: center; }
+    .growth-block-label {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--gray-light); margin-bottom: 0.3rem;
+    }
+    .growth-block-value {
+      font-family: 'Anton', sans-serif; font-weight: 400;
+      font-size: 1.5rem; color: var(--black); line-height: 1.2;
+    }
+    .growth-arrow {
+      font-size: 1.8rem; color: var(--green); font-weight: 800;
+    }
+    .growth-delta {
+      text-align: center; margin-top: 1rem;
+      font-size: 0.85rem; font-weight: 700; color: var(--green);
+      padding: 0.4rem 1rem; background: rgba(5,150,105,0.08); border-radius: 100px;
+      display: inline-block;
+    }
+    .growth-delta-wrap { text-align: center; margin-top: 0.8rem; }
+
+    /* ── Competitors ── */
+    .competitors-section {
+      padding: 2rem 2.5rem;
+      border-bottom: 1px solid var(--gray-border);
+    }
+    .competitors-title {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--gray); margin-bottom: 1rem;
+    }
+    .competitor-chips {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .competitor-chip {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.45rem 0.9rem; border-radius: 100px;
+      background: var(--cream); border: 1px solid var(--gray-border);
+      font-size: 0.78rem; font-weight: 600; color: var(--dark);
+      transition: all 0.2s;
+    }
+    .competitor-chip:hover {
+      border-color: var(--red); color: var(--red);
+    }
+    .competitor-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--red);
+    }
+
+    /* ── Prima Section ── */
+    .prima-section {
+      padding: 2rem 2.5rem;
+      border-bottom: 1px solid var(--gray-border);
+    }
+    .prima-title {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--gray); margin-bottom: 0.8rem;
+    }
+    .prima-range {
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .prima-value {
+      font-family: 'Anton', sans-serif; font-weight: 400;
+      font-size: 1.3rem; color: var(--black);
+    }
+    .prima-dash { color: var(--gray-light); font-weight: 600; }
+    .prima-note {
+      font-size: 0.78rem; color: var(--gray); margin-top: 0.5rem; font-weight: 500;
+    }
+
+    /* ── Oportunidad ── */
+    .oportunidad-section {
+      padding: 2rem 2.5rem;
+      background: var(--cream);
+    }
+    .oportunidad-title {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--gray); margin-bottom: 0.8rem;
+    }
+    .oportunidad-text {
+      font-size: 0.92rem; color: var(--dark); line-height: 1.75; font-weight: 500;
+    }
+    .oportunidad-tag {
+      display: inline-block; margin-top: 0.8rem;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 0.35rem 0.8rem; border-radius: 4px;
+    }
+    .oportunidad-tag.alta { background: rgba(5,150,105,0.1); color: var(--green); }
+    .oportunidad-tag.media { background: rgba(180,83,9,0.1); color: var(--amber); }
+    .oportunidad-tag.critica { background: rgba(230,51,41,0.08); color: var(--red); }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--black); padding: 3rem 2.5rem; text-align: center;
+      color: rgba(255,255,255,0.35); font-size: 0.78rem;
+    }
+    .footer-brand {
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.88rem;
+      color: var(--white); display: flex; align-items: center; justify-content: center;
+      gap: 0.5rem; margin-bottom: 0.8rem;
+    }
+    .footer-brand span { color: var(--red); }
+    .footer-logo { height: 22px; width: auto; filter: brightness(0) invert(1); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .selectors { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: 1fr; }
+      .kpi-cell { border-right: none; border-bottom: 1px solid var(--gray-border); }
+      .kpi-cell:last-child { border-bottom: none; }
+      .growth-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+      .growth-arrow { transform: rotate(90deg); }
+      .result-header { flex-direction: column; gap: 0.8rem; }
+      .nav-links { display: none; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      .calc-section { padding: 2rem 1.5rem 3rem; }
+      .kpi-cell, .penetration-section, .growth-section,
+      .competitors-section, .prima-section, .oportunidad-section {
+        padding-left: 1.5rem; padding-right: 1.5rem;
+      }
+      .result-header { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ Navigation ═══ -->
+<nav>
+  <div class="nav-inner">
+    <a href="dashboard.html" class="nav-brand"><img src="logo.svg" alt="Aldebaran" class="nav-logo">Aldebaran<span>.</span> Consulting</a>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="estudio.html">Estudio</a></li>
+      <li><a href="calculadora.html" style="color:var(--red);">Calculadora RC</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══ Hero ═══ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Herramienta Interactiva</div>
+    <h1>Calculadora de Oportunidad<br>Responsabilidad Civil</h1>
+    <p class="hero-sub">Explora el mercado potencial por subramo de RC y segmento de cliente. Datos basados en estimaciones 2024-2025 del mercado asegurador mexicano.</p>
+  </div>
+</div>
+
+<!-- ═══ Calculator ═══ -->
+<div class="calc-section">
+
+  <!-- Selectors -->
+  <div class="selectors">
+    <div class="selector-group">
+      <label for="subramo">Subramo de RC</label>
+      <select id="subramo">
+        <option value="" disabled selected>Selecciona un subramo...</option>
+        <option value="rc_general">RC General / Operaciones</option>
+        <option value="eo">RC Profesional (E&amp;O)</option>
+        <option value="do">RC Directores y Funcionarios (D&amp;O)</option>
+        <option value="rc_producto">RC Producto</option>
+        <option value="rc_ambiental">RC Ambiental / Contaminaci&oacute;n</option>
+        <option value="rc_cyber">RC Cyber / Digital</option>
+        <option value="car_ear">Construcci&oacute;n y Montaje (CAR/EAR)</option>
+        <option value="rc_transporte">RC Transporte</option>
+        <option value="rc_patronal">RC Patronal</option>
+      </select>
+    </div>
+    <div class="selector-group">
+      <label for="segmento">Segmento de Cliente</label>
+      <select id="segmento">
+        <option value="" disabled selected>Selecciona un segmento...</option>
+        <option value="pyme">PyME</option>
+        <option value="mediana">Mediana Empresa</option>
+        <option value="corporativo">Corporativo Grande</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Results Container -->
+  <div id="results">
+    <div class="placeholder">
+      <div class="placeholder-icon">&darr;</div>
+      <p>Selecciona un subramo y un segmento para ver el an&aacute;lisis de oportunidad.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ Footer ═══ -->
+<footer>
+  <div class="footer-brand"><img src="logo.svg" alt="Aldebaran" class="footer-logo">Aldebaran<span>.</span> Consulting</div>
+  Market Intelligence &mdash; Confidencial &mdash; 2025
+</footer>
+
+<script>
+(function() {
+
+  /* ═══════════════════════════════════════════
+     DATA
+     ═══════════════════════════════════════════ */
+
+  var DATA = {
+    rc_general: {
+      nombre: 'RC General / Operaciones',
+      mercadoMin: 150, mercadoMax: 200,
+      penetracion: 40,
+      penetracionTarget: 65,
+      competidores: ['Chubb', 'AIG', 'HDI', 'GNP', 'Mapfre'],
+      prima: {
+        pyme: { min: '$15K', max: '$50K', moneda: 'MXN', nota: 'Prima anual t\u00edpica para PyMEs' },
+        mediana: { min: '$50K', max: '$200K', moneda: 'MXN', nota: 'Prima anual para empresa mediana' },
+        corporativo: { min: '$200K', max: '$5M', moneda: 'MXN', nota: 'Prima anual para corporativos grandes' }
+      },
+      suraStatus: 'tiene',
+      suraLabel: 'Tiene producto completo',
+      suraIcon: '\u2713',
+      oportunidad: {
+        pyme: 'Sura tiene producto competitivo. La oportunidad est\u00e1 en ganar participaci\u00f3n en el segmento PyME donde la penetraci\u00f3n a\u00fan es baja. Mejorar la distribuci\u00f3n digital y simplificar el proceso de cotizaci\u00f3n puede capturar clientes de HDI y GNP.',
+        mediana: 'Mercado competido pero Sura tiene posici\u00f3n. Diferenciaci\u00f3n v\u00eda servicio de siniestros y coberturas flexibles.',
+        corporativo: 'Mercado maduro dominado por Chubb y AIG. Sura puede competir en cuentas medianas-grandes con mejor servicio.'
+      },
+      oportunidadNivel: 'media'
+    },
+
+    eo: {
+      nombre: 'RC Profesional (E&O)',
+      mercadoMin: 40, mercadoMax: 60,
+      penetracion: 5,
+      penetracionTarget: 25,
+      competidores: ['AIG', 'Chubb', 'GNP', 'GMX'],
+      prima: {
+        pyme: { min: '$8K', max: '$25K', moneda: 'MXN', nota: 'Profesionistas independientes y despachos peque\u00f1os' },
+        mediana: { min: '$25K', max: '$100K', moneda: 'MXN', nota: 'Despachos y firmas medianas' },
+        corporativo: { min: '$50K', max: '$300K', moneda: 'MXN', nota: 'Firmas grandes y consultoras' }
+      },
+      suraStatus: 'no-tiene',
+      suraLabel: 'No tiene \u2014 BRECHA CR\u00cdTICA',
+      suraIcon: '\u2717',
+      oportunidad: {
+        pyme: 'BRECHA CR\u00cdTICA. Sura no tiene producto E&O. El mercado de profesionistas independientes (m\u00e9dicos, abogados, contadores, arquitectos) est\u00e1 pr\u00e1cticamente sin atender. Con menos del 5% de penetraci\u00f3n, el potencial de crecimiento es enorme. Se recomienda desarrollo urgente de producto.',
+        mediana: 'Sin producto actual. Los despachos profesionales medianos buscan cobertura E&O activamente. AIG y Chubb dominan por falta de competencia local.',
+        corporativo: 'Las firmas grandes ya tienen cobertura con AIG o Chubb. Sura necesitar\u00eda un producto muy competitivo para entrar a este segmento.'
+      },
+      oportunidadNivel: 'critica'
+    },
+
+    do: {
+      nombre: 'RC Directores y Funcionarios (D&O)',
+      mercadoMin: 80, mercadoMax: 120,
+      penetracion: 15,
+      penetracionPyme: 5,
+      penetracionCorp: 35,
+      penetracionBMV: 75,
+      penetracionTarget: 40,
+      competidores: ['Chubb', 'AIG', 'Zurich', 'Mapfre'],
+      prima: {
+        pyme: { min: '$85K', max: '$260K', moneda: 'MXN', nota: 'USD 5-15K \u2014 PyMEs con consejo de administraci\u00f3n' },
+        mediana: { min: '$260K', max: '$680K', moneda: 'MXN', nota: 'Empresas medianas con estructura de gobierno' },
+        corporativo: { min: '$680K', max: '$2.6M', moneda: 'MXN', nota: 'Corporativos grandes y empresas BMV' }
+      },
+      suraStatus: 'limitado',
+      suraLabel: 'Limitado \u2014 cobertura b\u00e1sica',
+      suraIcon: '!',
+      oportunidad: {
+        pyme: 'Oportunidad ALTA. La penetraci\u00f3n D&O en PyMEs es menor al 5%. Sura tiene producto b\u00e1sico que necesita fortalecerse. Diferenciarse con precio accesible y lenguaje claro para due\u00f1os de PyMEs que desconocen el riesgo.',
+        mediana: 'Mercado en crecimiento. Las reformas de gobierno corporativo empujan la demanda. Sura debe mejorar coberturas para competir con Chubb y AIG.',
+        corporativo: 'Mercado concentrado en Chubb y AIG. El producto actual de Sura no compite a este nivel. Se requiere upgrade significativo de l\u00edmites y coberturas.'
+      },
+      oportunidadNivel: 'alta'
+    },
+
+    rc_producto: {
+      nombre: 'RC Producto',
+      mercadoMin: 50, mercadoMax: 80,
+      penetracion: 12,
+      penetracionTarget: 35,
+      competidores: ['Chubb', 'AIG', 'GNP', 'GMX'],
+      prima: {
+        pyme: { min: '$20K', max: '$80K', moneda: 'MXN', nota: 'Fabricantes peque\u00f1os' },
+        mediana: { min: '$80K', max: '$500K', moneda: 'MXN', nota: 'Fabricantes medianos y distribuidores' },
+        corporativo: { min: '$200K', max: '$2M', moneda: 'MXN', nota: 'Grandes fabricantes y exportadores' }
+      },
+      suraStatus: 'limitado',
+      suraLabel: 'B\u00e1sico \u2014 solo extensi\u00f3n de RC General',
+      suraIcon: '!',
+      oportunidad: {
+        pyme: 'Sura ofrece RC Producto solo como extensi\u00f3n de RC General, no como p\u00f3liza standalone. Para PyMEs manufactureras y alimentarias, se necesita un producto dedicado con coberturas de retiro de producto.',
+        mediana: 'Las empresas medianas de manufactura y alimentos necesitan coberturas espec\u00edficas que el producto actual de Sura no cubre. Oportunidad de desarrollo de producto standalone.',
+        corporativo: 'Exportadores requieren coberturas que cumplan est\u00e1ndares internacionales. El producto actual es insuficiente para este segmento.'
+      },
+      oportunidadNivel: 'alta'
+    },
+
+    rc_ambiental: {
+      nombre: 'RC Ambiental / Contaminaci\u00f3n',
+      mercadoMin: 15, mercadoMax: 30,
+      penetracion: 1,
+      penetracionTarget: 15,
+      competidores: ['Chubb', 'AIG', 'Berkley', 'GMX'],
+      prima: {
+        pyme: { min: '$100K', max: '$250K', moneda: 'MXN', nota: 'Industrias con riesgo ambiental bajo' },
+        mediana: { min: '$250K', max: '$500K', moneda: 'MXN', nota: 'Industrias con manejo de qu\u00edmicos' },
+        corporativo: { min: '$500K', max: '$2M+', moneda: 'MXN', nota: 'Miner\u00eda, petroqu\u00edmica, energ\u00eda' }
+      },
+      suraStatus: 'limitado',
+      suraLabel: 'Solo contaminaci\u00f3n accidental',
+      suraIcon: '!',
+      oportunidad: {
+        pyme: 'El mercado de RC Ambiental en M\u00e9xico est\u00e1 pr\u00e1cticamente virgen (<1% penetraci\u00f3n). Solo 4 aseguradoras ofrecen cobertura dedicada. Sura cubre \u00fanicamente contaminaci\u00f3n accidental, no gradual. La Ley de Responsabilidad Ambiental (2013) empujar\u00e1 la demanda.',
+        mediana: 'Las regulaciones ambientales se endurecen. Empresas con manejo de residuos peligrosos necesitan cobertura que Sura no ofrece actualmente.',
+        corporativo: 'Sector energ\u00e9tico y minero requiere coberturas especializadas. Sura necesita alianzas con reaseguradoras especializadas (Berkley, Beazley) para entrar.'
+      },
+      oportunidadNivel: 'alta'
+    },
+
+    rc_cyber: {
+      nombre: 'RC Cyber / Digital',
+      mercadoMin: 30, mercadoMax: 50,
+      penetracion: 5,
+      penetracionTarget: 25,
+      crecimiento: '+30% anual',
+      competidores: ['AIG', 'Chubb', 'GNP-Beazley', 'BBVA', 'Sura'],
+      prima: {
+        pyme: { min: '$15K', max: '$50K', moneda: 'MXN', nota: 'Cobertura b\u00e1sica para PyMEs' },
+        mediana: { min: '$50K', max: '$200K', moneda: 'MXN', nota: 'Empresas con datos sensibles' },
+        corporativo: { min: '$200K', max: '$2M', moneda: 'MXN', nota: 'Corporativos con alto riesgo digital' }
+      },
+      suraStatus: 'tiene',
+      suraLabel: 'Producto completo \u2014 VENTAJA',
+      suraIcon: '\u2713',
+      oportunidad: {
+        pyme: 'VENTAJA COMPETITIVA. Sura es una de las pocas aseguradoras con producto Cyber completo. Con crecimiento del 30% anual y solo 5% de penetraci\u00f3n, el potencial es masivo. Capitalizar el posicionamiento actual con campa\u00f1as de concientizaci\u00f3n.',
+        mediana: 'Sura est\u00e1 bien posicionada. Reforzar con servicios de prevenci\u00f3n y respuesta a incidentes para diferenciarse de AIG y Chubb.',
+        corporativo: 'Competencia directa con AIG y Chubb en l\u00edmites altos. La ventaja de Sura est\u00e1 en el servicio integral y la prevenci\u00f3n.'
+      },
+      oportunidadNivel: 'alta'
+    },
+
+    car_ear: {
+      nombre: 'Construcci\u00f3n y Montaje (CAR/EAR)',
+      mercadoMin: 60, mercadoMax: 100,
+      penetracion: 60,
+      penetracionTarget: 80,
+      competidores: ['Mapfre', 'Chubb', 'Liberty', 'GMX'],
+      prima: {
+        pyme: { min: '0.1%', max: '0.3%', moneda: 'del valor de obra', nota: 'Obras menores (hasta $50M MXN)' },
+        mediana: { min: '0.15%', max: '0.4%', moneda: 'del valor de obra', nota: 'Obras medianas ($50-500M MXN)' },
+        corporativo: { min: '0.2%', max: '0.5%', moneda: 'del valor de obra', nota: 'Megaproyectos (+$500M MXN)' }
+      },
+      suraStatus: 'tiene',
+      suraLabel: 'Tiene producto',
+      suraIcon: '\u2713',
+      oportunidad: {
+        pyme: 'Sura tiene producto CAR/EAR. La oportunidad en obras peque\u00f1as est\u00e1 en simplificar el proceso de emisi\u00f3n y ofrecer p\u00f3lizas r\u00e1pidas para constructoras peque\u00f1as.',
+        mediana: 'Mercado competido con Mapfre como l\u00edder. Sura puede diferenciarse con tiempos de emisi\u00f3n m\u00e1s r\u00e1pidos y ajuste de siniestros eficiente.',
+        corporativo: 'Los megaproyectos de infraestructura (Tren Maya, aeropuertos) requieren capacidad de reaseguro. Sura necesita alianzas estrat\u00e9gicas.'
+      },
+      oportunidadNivel: 'media'
+    },
+
+    rc_transporte: {
+      nombre: 'RC Transporte',
+      mercadoMin: 40, mercadoMax: 60,
+      penetracion: 45,
+      penetracionTarget: 70,
+      competidores: ['HDI', 'GNP', 'Mapfre', 'AIG', 'GMX'],
+      prima: {
+        pyme: { min: '$20K', max: '$50K', moneda: 'MXN', nota: 'Transportistas individuales y flotillas peque\u00f1as' },
+        mediana: { min: '$50K', max: '$100K', moneda: 'MXN', nota: 'Empresas de transporte medianas' },
+        corporativo: { min: '$100K', max: '$500K+', moneda: 'MXN', nota: 'Grandes flotillas y log\u00edstica' }
+      },
+      suraStatus: 'tiene',
+      suraLabel: 'Tiene producto',
+      suraIcon: '\u2713',
+      oportunidad: {
+        pyme: 'Sura tiene producto. La RC de transporte es parcialmente obligatoria (carga federal), lo que asegura demanda base. Competir en precio con HDI que domina el segmento.',
+        mediana: 'Oportunidad de paquetes integrales: RC + Carga + Flotilla. Diferenciaci\u00f3n por servicio.',
+        corporativo: 'Grandes operadores log\u00edsticos ya tienen programas con HDI y GNP. Sura puede competir en cuentas de nearshoring.'
+      },
+      oportunidadNivel: 'media'
+    },
+
+    rc_patronal: {
+      nombre: 'RC Patronal',
+      mercadoMin: 30, mercadoMax: 50,
+      penetracion: 10,
+      penetracionTarget: 30,
+      competidores: ['Chubb', 'AIG', 'Allianz', 'GNP'],
+      prima: {
+        pyme: { min: '$15K', max: '$40K', moneda: 'MXN', nota: 'Empresas con 10-50 empleados' },
+        mediana: { min: '$40K', max: '$80K', moneda: 'MXN', nota: 'Empresas con 50-250 empleados' },
+        corporativo: { min: '$80K', max: '$500K+', moneda: 'MXN', nota: 'Empresas con +250 empleados' }
+      },
+      suraStatus: 'limitado',
+      suraLabel: 'Solo como endoso de RC General',
+      suraIcon: '!',
+      oportunidad: {
+        pyme: 'Sura ofrece RC Patronal solo como endoso, no como producto standalone. Las PyMEs con actividades de alto riesgo (construcci\u00f3n, manufactura) necesitan cobertura dedicada que complemente el IMSS.',
+        mediana: 'Las reformas laborales de outsourcing incrementaron la exposici\u00f3n patronal. Oportunidad de producto dedicado para empresas medianas.',
+        corporativo: 'Las demandas laborales por accidentes crecen. Un producto standalone con coberturas amplias competir\u00eda con Chubb y AIG.'
+      },
+      oportunidadNivel: 'alta'
+    }
+  };
+
+  /* ═══════════════════════════════════════════
+     RENDER
+     ═══════════════════════════════════════════ */
+
+  var selSubramo = document.getElementById('subramo');
+  var selSegmento = document.getElementById('segmento');
+  var resultsEl = document.getElementById('results');
+
+  function update() {
+    var sk = selSubramo.value;
+    var seg = selSegmento.value;
+    if (!sk || !seg) {
+      resultsEl.innerHTML = '<div class="placeholder"><div class="placeholder-icon">\u2193</div><p>Selecciona un subramo y un segmento para ver el an\u00e1lisis de oportunidad.</p></div>';
+      return;
+    }
+
+    var d = DATA[sk];
+    if (!d) return;
+
+    var segLabel = seg === 'pyme' ? 'PyME' : seg === 'mediana' ? 'Mediana Empresa' : 'Corporativo Grande';
+    var mercadoMid = Math.round((d.mercadoMin + d.mercadoMax) / 2);
+
+    // Penetration for this context
+    var pen = d.penetracion;
+    if (sk === 'do') {
+      pen = seg === 'pyme' ? 5 : seg === 'mediana' ? 20 : 35;
+    }
+    var penTarget = d.penetracionTarget;
+    var currentMarket = Math.round(mercadoMid * pen / 100);
+    var potentialMarket = Math.round(mercadoMid * penTarget / 100);
+    var delta = potentialMarket - currentMarket;
+
+    // Prima
+    var prima = d.prima[seg];
+
+    // Sura status classes
+    var statusClass = d.suraStatus;
+
+    // Oportunidad
+    var opText = d.oportunidad[seg];
+    var opNivel = d.oportunidadNivel;
+    var opNivelLabel = opNivel === 'critica' ? 'Brecha Cr\u00edtica' : opNivel === 'alta' ? 'Oportunidad Alta' : 'Oportunidad Media';
+
+    // Crecimiento badge
+    var crecHTML = d.crecimiento ? '<span style="display:inline-block;margin-left:0.5rem;font-size:0.72rem;font-weight:700;color:var(--green);background:rgba(5,150,105,0.08);padding:0.2rem 0.6rem;border-radius:100px;">' + d.crecimiento + '</span>' : '';
+
+    var html = '';
+    html += '<div class="result-card">';
+
+    // Header
+    html += '<div class="result-header">';
+    html += '<div>';
+    html += '<div class="result-title">' + d.nombre + '</div>';
+    html += '<div class="sura-status ' + statusClass + '">';
+    html += '<div class="sura-status-icon">' + d.suraIcon + '</div>';
+    html += 'Sura: ' + d.suraLabel;
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="result-segment-badge">' + segLabel + '</div>';
+    html += '</div>';
+
+    // KPIs
+    html += '<div class="kpi-grid">';
+    html += '<div class="kpi-cell">';
+    html += '<div class="kpi-label">Mercado Total Estimado</div>';
+    html += '<div class="kpi-value">USD $' + d.mercadoMin + '-' + d.mercadoMax + 'M</div>';
+    html += '<div class="kpi-sub">Mercado mexicano de ' + d.nombre + '</div>';
+    html += '</div>';
+    html += '<div class="kpi-cell">';
+    html += '<div class="kpi-label">Penetraci\u00f3n Actual</div>';
+    html += '<div class="kpi-value">' + pen + '%' + crecHTML + '</div>';
+    html += '<div class="kpi-sub">' + (pen < 10 ? 'Mercado subdesarrollado' : pen < 30 ? 'Mercado en desarrollo' : pen < 50 ? 'Penetraci\u00f3n media' : 'Mercado maduro') + '</div>';
+    html += '</div>';
+    html += '<div class="kpi-cell">';
+    html += '<div class="kpi-label">Prima Anual T\u00edpica</div>';
+    html += '<div class="kpi-value">' + prima.min + ' \u2013 ' + prima.max + '</div>';
+    html += '<div class="kpi-sub">' + prima.moneda + '</div>';
+    html += '</div>';
+    html += '</div>';
+
+    // Penetration bars
+    html += '<div class="penetration-section">';
+    html += '<div class="penetration-title">Nivel de Penetraci\u00f3n</div>';
+    html += '<div class="bar-row">';
+    html += '<div class="bar-label"><span class="bar-label-text">Penetraci\u00f3n actual</span><span class="bar-label-value">' + pen + '%</span></div>';
+    html += '<div class="bar-track"><div class="bar-fill current" style="width:0%" data-width="' + pen + '%"></div></div>';
+    html += '</div>';
+    html += '<div class="bar-row">';
+    html += '<div class="bar-label"><span class="bar-label-text">Meta potencial (benchmark)</span><span class="bar-label-value">' + penTarget + '%</span></div>';
+    html += '<div class="bar-track"><div class="bar-fill potential" style="width:0%" data-width="' + penTarget + '%"></div></div>';
+    html += '</div>';
+    html += '</div>';
+
+    // Growth potential
+    html += '<div class="growth-section">';
+    html += '<div class="growth-title">Potencial de Crecimiento</div>';
+    html += '<div class="growth-grid">';
+    html += '<div class="growth-block">';
+    html += '<div class="growth-block-label">Mercado capturado hoy</div>';
+    html += '<div class="growth-block-value">USD $' + currentMarket + 'M</div>';
+    html += '</div>';
+    html += '<div class="growth-arrow">\u2192</div>';
+    html += '<div class="growth-block">';
+    html += '<div class="growth-block-label">Si penetraci\u00f3n llega a ' + penTarget + '%</div>';
+    html += '<div class="growth-block-value">USD $' + potentialMarket + 'M</div>';
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="growth-delta-wrap"><div class="growth-delta">+USD $' + delta + 'M de oportunidad sin capturar</div></div>';
+    html += '</div>';
+
+    // Competitors
+    html += '<div class="competitors-section">';
+    html += '<div class="competitors-title">Competidores Principales</div>';
+    html += '<div class="competitor-chips">';
+    for (var i = 0; i < d.competidores.length; i++) {
+      html += '<div class="competitor-chip"><div class="competitor-dot"></div>' + d.competidores[i] + '</div>';
+    }
+    html += '</div>';
+    html += '</div>';
+
+    // Prima detail
+    html += '<div class="prima-section">';
+    html += '<div class="prima-title">Detalle de Prima \u2014 ' + segLabel + '</div>';
+    html += '<div class="prima-range">';
+    html += '<span class="prima-value">' + prima.min + '</span>';
+    html += '<span class="prima-dash">\u2014</span>';
+    html += '<span class="prima-value">' + prima.max + '</span>';
+    html += '<span style="font-size:0.82rem;color:var(--gray);font-weight:600;margin-left:0.5rem;">' + prima.moneda + '</span>';
+    html += '</div>';
+    html += '<div class="prima-note">' + prima.nota + '</div>';
+    html += '</div>';
+
+    // Oportunidad
+    html += '<div class="oportunidad-section">';
+    html += '<div class="oportunidad-title">Oportunidad para Sura</div>';
+    html += '<p class="oportunidad-text">' + opText + '</p>';
+    html += '<div class="oportunidad-tag ' + opNivel + '">' + opNivelLabel + '</div>';
+    html += '</div>';
+
+    html += '</div>';
+
+    resultsEl.innerHTML = html;
+
+    // Animate bars
+    requestAnimationFrame(function() {
+      var bars = resultsEl.querySelectorAll('.bar-fill');
+      for (var j = 0; j < bars.length; j++) {
+        bars[j].style.width = bars[j].getAttribute('data-width');
+      }
+    });
+  }
+
+  selSubramo.addEventListener('change', update);
+  selSegmento.addEventListener('change', update);
+
+})();
+</script>
+
+</body>
+</html>
