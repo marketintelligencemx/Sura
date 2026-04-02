@@ -65,20 +65,21 @@
       border-bottom: 1px solid var(--gray-border);
     }
     .nav-inner {
-      max-width: 1200px; margin: 0 auto; padding: 0 2.5rem;
-      display: flex; align-items: center; justify-content: space-between; height: 56px;
+      max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 1rem;
     }
     .nav-brand {
-      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--black);
-      display: flex; align-items: center; gap: 0.5rem;
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--black);
+      display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0;
     }
     .nav-brand span { color: var(--red); }
     .nav-logo { height: 26px; width: auto; }
-    .nav-links { display: flex; gap: 0; list-style: none; }
+    .nav-links { display: flex; gap: 0; list-style: none; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; scrollbar-width: none; flex-shrink: 1; min-width: 0; }
+    .nav-links::-webkit-scrollbar { display: none; }
     .nav-links a {
-      color: var(--gray); text-decoration: none; font-size: 0.75rem; font-weight: 600;
-      padding: 0.4rem 0.7rem; text-transform: uppercase; letter-spacing: 0.06em;
-      transition: color 0.2s;
+      color: var(--gray); text-decoration: none; font-size: 0.68rem; font-weight: 600;
+      padding: 0.35rem 0.5rem; text-transform: uppercase; letter-spacing: 0.04em;
+      transition: color 0.2s; white-space: nowrap;
     }
     .nav-links a:hover { color: var(--red); }
 
