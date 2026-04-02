@@ -360,13 +360,14 @@
     <ul class="nav-links">
       <li><a href="#resumen">Resumen</a></li>
       <li><a href="#macro">Macro</a></li>
+      <li><a href="#geografia">Geograf&iacute;a</a></li>
       <li><a href="#competencia">Competencia</a></li>
-      <li><a href="#capacidades">Capacidades</a></li>
+      <li><a href="#financiero">Finanzas</a></li>
       <li><a href="#ramos">Ramos</a></li>
       <li><a href="#danos">Da&ntilde;os</a></li>
       <li><a href="#rc">RC</a></li>
       <li><a href="#slas">SLAs</a></li>
-      <li><a href="#gap">Sura</a></li>
+      <li><a href="#sura-evolucion">Sura</a></li>
       <li><a href="#playbook">Playbook</a></li>
       <li><a href="#conclusiones">Cierre</a></li>
     </ul>
@@ -604,6 +605,435 @@
 </section>
 
 <!-- ════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════════ -->
+<!-- DISTRIBUCIÓN GEOGRÁFICA — MAPA DE CALOR -->
+<!-- ════════════════════════════════════════ -->
+<section class="section" id="geografia">
+  <div class="part-header">
+    <div class="section-label">Distribución Geográfica</div>
+    <h2>Concentración de Prima por Entidad Federativa</h2>
+    <p>Mapa de calor interactivo de prima emitida por estado, 2025 Q4. Las zonas de mayor intensidad revelan la hipercentralización del mercado asegurador mexicano.</p>
+  </div>
+
+  <!-- ─── Callout: Concentración ─── -->
+  <div class="callout" style="margin-top:2rem">
+    <p><strong>Concentración extrema:</strong> CDMX + Estado de México representan <strong>38.3%</strong> de la prima total. Los 4 estados líderes (CDMX, EdoMex, Nuevo León, Jalisco) concentran <strong>51.3%</strong> del mercado nacional.</p>
+  </div>
+
+  <!-- ─── Zonas KPI ─── -->
+  <h3>Distribución por Zona</h3>
+  <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+    <div class="card" style="border-top: 3px solid var(--red);">
+      <div class="card-tag tag-maduro">Centro</div>
+      <div class="card-title">CDMX</div>
+      <div style="font-family:'Anton',sans-serif; font-size:1.8rem; color:var(--black); margin-bottom:0.25rem;">$1,871M</div>
+      <p style="font-size:0.85rem;">27.6% de la prima total nacional. Concentra sedes corporativas y grandes cuentas.</p>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--dark);">
+      <div class="card-tag tag-maduro">Zona Sur</div>
+      <div class="card-title">Sur</div>
+      <div style="font-family:'Anton',sans-serif; font-size:1.8rem; color:var(--black); margin-bottom:0.25rem;">$1,901M</div>
+      <p style="font-size:0.85rem;">28.0% del total. Incluye EdoMex, Puebla, Veracruz, Guerrero, Oaxaca, Chiapas y peninsula.</p>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--gray);">
+      <div class="card-tag tag-desarrollo">Zona Norte</div>
+      <div class="card-title">Norte</div>
+      <div style="font-family:'Anton',sans-serif; font-size:1.8rem; color:var(--black); margin-bottom:0.25rem;">$1,712M</div>
+      <p style="font-size:0.85rem;">25.2% del total. Nuevo León lidera con clústeres industriales y manufactura.</p>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--amber);">
+      <div class="card-tag tag-emergente">Zona Occidente</div>
+      <div class="card-title">Occidente</div>
+      <div style="font-family:'Anton',sans-serif; font-size:1.8rem; color:var(--black); margin-bottom:0.25rem;">$1,303M</div>
+      <p style="font-size:0.85rem;">19.2% del total. Jalisco como polo principal, seguido de Guanajuato y Aguascalientes.</p>
+    </div>
+  </div>
+
+  <!-- ─── SVG Map ─── -->
+  <h3>Mapa de Calor — Prima Emitida por Estado</h3>
+  <div class="chart-container" style="position:relative; padding:1.5rem;">
+    <div class="chart-title">Prima Emitida por Entidad Federativa (MXP, 2025 Q4)</div>
+
+    <!-- Legend -->
+    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1.25rem; font-size:0.78rem; color:var(--gray);">
+      <span>Menor</span>
+      <div style="width:200px; height:14px; background:linear-gradient(to right, #E0DDDA, #F2A8A4, #E63329); border-radius:2px;"></div>
+      <span>Mayor</span>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="map-tooltip" style="
+      display:none; position:absolute; z-index:50;
+      background:var(--black); color:#fff; padding:0.65rem 1rem;
+      font-size:0.82rem; pointer-events:none; white-space:nowrap;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    ">
+      <div id="tt-name" style="font-weight:700; margin-bottom:0.2rem;"></div>
+      <div id="tt-premium"></div>
+      <div id="tt-pct" style="color:var(--red); font-weight:600;"></div>
+    </div>
+
+    <svg id="mexico-map" viewBox="0 0 1000 700" style="width:100%; height:auto; max-height:560px;" xmlns="http://www.w3.org/2000/svg">
+      <!-- Baja California -->
+      <path data-state="Baja California" data-premium="229,671,451" data-pct="3.4%"
+        d="M30,80 L60,50 L80,55 L85,90 L90,140 L85,190 L75,230 L60,260 L45,250 L35,220 L25,180 L20,130 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Baja California Sur -->
+      <path data-state="Baja California Sur" data-premium="42,757,307" data-pct="0.6%"
+        d="M45,250 L60,260 L75,280 L85,320 L80,360 L65,380 L50,370 L40,340 L35,300 L38,270 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Sonora -->
+      <path data-state="Sonora" data-premium="254,366,985" data-pct="3.7%"
+        d="M85,55 L140,40 L200,45 L210,60 L215,110 L200,160 L170,200 L130,210 L100,200 L90,170 L85,130 L90,90 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Chihuahua -->
+      <path data-state="Chihuahua" data-premium="156,188,313" data-pct="2.3%"
+        d="M200,45 L280,40 L310,55 L320,100 L315,160 L300,210 L260,230 L220,220 L200,200 L200,160 L210,110 L210,60 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Coahuila -->
+      <path data-state="Coahuila" data-premium="224,467,231" data-pct="3.3%"
+        d="M310,55 L380,50 L420,70 L430,120 L420,180 L390,220 L350,230 L310,220 L300,210 L305,160 L320,100 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Nuevo León -->
+      <path data-state="Nuevo León" data-premium="471,438,381" data-pct="6.9%"
+        d="M420,70 L470,65 L500,90 L510,140 L500,190 L470,220 L440,230 L420,220 L420,180 L430,120 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Tamaulipas -->
+      <path data-state="Tamaulipas" data-premium="157,010,460" data-pct="2.3%"
+        d="M470,65 L530,55 L560,80 L570,130 L560,190 L540,240 L510,270 L480,260 L470,230 L470,220 L500,190 L510,140 L500,90 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Sinaloa -->
+      <path data-state="Sinaloa" data-premium="128,757,437" data-pct="1.9%"
+        d="M100,200 L130,210 L170,220 L200,240 L190,280 L170,320 L140,330 L110,310 L95,280 L90,250 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Durango -->
+      <path data-state="Durango" data-premium="46,893,434" data-pct="0.7%"
+        d="M200,200 L260,230 L300,240 L310,280 L290,320 L250,330 L220,310 L200,280 L190,250 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Zacatecas -->
+      <path data-state="Zacatecas" data-premium="161,721,639" data-pct="2.4%"
+        d="M300,240 L350,250 L380,270 L385,310 L370,350 L340,360 L310,340 L290,320 L310,280 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- San Luis Potosí -->
+      <path data-state="San Luis Potosí" data-premium="95,540,934" data-pct="1.4%"
+        d="M380,230 L430,240 L460,270 L460,320 L440,360 L410,370 L385,350 L385,310 L380,270 L370,250 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Nayarit -->
+      <path data-state="Nayarit" data-premium="46,859,482" data-pct="0.7%"
+        d="M140,330 L170,320 L200,340 L200,370 L180,390 L155,385 L140,360 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Aguascalientes -->
+      <path data-state="Aguascalientes" data-premium="93,068,868" data-pct="1.4%"
+        d="M310,340 L340,340 L345,365 L325,380 L305,370 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Jalisco -->
+      <path data-state="Jalisco" data-premium="410,610,243" data-pct="6.1%"
+        d="M155,385 L180,390 L200,370 L220,360 L260,370 L290,380 L305,400 L290,440 L260,460 L230,450 L200,430 L170,420 L150,410 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Colima -->
+      <path data-state="Colima" data-premium="29,235,417" data-pct="0.4%"
+        d="M150,410 L170,420 L175,445 L160,460 L140,450 L135,430 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Guanajuato -->
+      <path data-state="Guanajuato" data-premium="226,633,249" data-pct="3.3%"
+        d="M305,370 L345,365 L380,380 L400,400 L390,430 L360,440 L330,430 L305,420 L305,400 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Michoacán -->
+      <path data-state="Michoacán" data-premium="117,564,825" data-pct="1.7%"
+        d="M200,430 L260,460 L305,460 L330,470 L340,500 L310,520 L270,530 L230,510 L200,490 L185,460 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Querétaro -->
+      <path data-state="Querétaro" data-premium="121,774,790" data-pct="1.8%"
+        d="M400,370 L435,370 L445,400 L430,420 L405,415 L395,400 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Hidalgo -->
+      <path data-state="Hidalgo" data-premium="87,302,289" data-pct="1.3%"
+        d="M445,370 L480,365 L500,390 L495,420 L470,430 L450,415 L445,400 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Veracruz -->
+      <path data-state="Veracruz" data-premium="208,883,846" data-pct="3.1%"
+        d="M500,300 L530,310 L545,350 L555,400 L560,450 L555,500 L540,530 L520,540 L510,510 L500,470 L490,440 L490,400 L500,370 L500,340 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Puebla -->
+      <path data-state="Puebla" data-premium="174,132,079" data-pct="2.6%"
+        d="M450,430 L490,440 L500,470 L495,500 L470,510 L445,500 L435,470 L440,445 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Tlaxcala -->
+      <path data-state="Tlaxcala" data-premium="28,128,020" data-pct="0.4%"
+        d="M470,420 L490,425 L490,440 L475,445 L465,435 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Estado de México -->
+      <path data-state="Estado de México" data-premium="726,987,098" data-pct="10.7%"
+        d="M390,430 L420,420 L445,430 L440,460 L430,480 L405,490 L380,480 L370,460 L370,440 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Ciudad de México -->
+      <path data-state="Ciudad de México" data-premium="1,870,667,292" data-pct="27.6%"
+        d="M410,450 L425,448 L430,462 L422,475 L408,472 L405,460 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Morelos -->
+      <path data-state="Morelos" data-premium="67,920,483" data-pct="1.0%"
+        d="M405,490 L425,485 L435,500 L425,515 L405,510 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Guerrero -->
+      <path data-state="Guerrero" data-premium="92,942,445" data-pct="1.4%"
+        d="M310,520 L340,510 L370,500 L400,510 L405,540 L390,570 L360,580 L320,570 L290,550 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Oaxaca -->
+      <path data-state="Oaxaca" data-premium="69,475,649" data-pct="1.0%"
+        d="M405,540 L445,520 L490,530 L520,550 L530,580 L510,610 L470,620 L440,610 L410,590 L400,570 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Chiapas -->
+      <path data-state="Chiapas" data-premium="62,414,457" data-pct="0.9%"
+        d="M530,550 L560,540 L590,550 L600,580 L595,620 L575,650 L545,650 L520,630 L510,610 L525,580 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Tabasco -->
+      <path data-state="Tabasco" data-premium="71,986,216" data-pct="1.1%"
+        d="M540,500 L580,495 L610,510 L615,540 L590,550 L560,540 L540,520 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Campeche -->
+      <path data-state="Campeche" data-premium="99,993,721" data-pct="1.5%"
+        d="M615,460 L660,450 L690,470 L700,510 L680,540 L650,550 L620,540 L610,510 L615,480 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Yucatán -->
+      <path data-state="Yucatán" data-premium="78,607,983" data-pct="1.2%"
+        d="M660,380 L720,370 L760,385 L760,420 L740,440 L700,450 L660,450 L650,430 L650,400 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+      <!-- Quintana Roo -->
+      <path data-state="Quintana Roo" data-premium="132,059,835" data-pct="1.9%"
+        d="M740,440 L770,430 L790,450 L800,500 L790,550 L770,570 L750,560 L730,530 L710,500 L700,470 L710,450 Z"
+        stroke="#fff" stroke-width="1.5" fill="#E0DDDA"/>
+    </svg>
+  </div>
+
+  <!-- ─── Bar Chart: Top 10 ─── -->
+  <h3>Top 10 Entidades por Prima Emitida</h3>
+  <div class="chart-container">
+    <div class="chart-title">Participación en Prima Nacional (%, 2025 Q4)</div>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">CDMX</div>
+        <div class="bar-track"><div class="bar-fill navy" style="width:100%"><span>27.6% — $1,871M</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Edo. de México</div>
+        <div class="bar-track"><div class="bar-fill teal" style="width:38.8%"><span>10.7% — $727M</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Nuevo León</div>
+        <div class="bar-track"><div class="bar-fill navy" style="width:25%"><span>6.9% — $471M</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Jalisco</div>
+        <div class="bar-track"><div class="bar-fill slate" style="width:22.1%"><span>6.1% — $411M</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Sonora</div>
+        <div class="bar-track"><div class="bar-fill navy" style="width:13.4%"><span>3.7% — $254M</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Baja California</div>
+        <div class="bar-track"><div class="bar-fill slate" style="width:12.3%"><span>3.4% — $230M</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Guanajuato</div>
+        <div class="bar-track"><div class="bar-fill navy" style="width:12%"><span>3.3% — $227M</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Coahuila</div>
+        <div class="bar-track"><div class="bar-fill slate" style="width:12%"><span>3.3% — $224M</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Veracruz</div>
+        <div class="bar-track"><div class="bar-fill navy" style="width:11.2%"><span>3.1% — $209M</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Puebla</div>
+        <div class="bar-track"><div class="bar-fill slate" style="width:9.4%"><span>2.6% — $174M</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Full State Table ─── -->
+  <h3>Detalle por Entidad Federativa</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Estado</th>
+          <th style="text-align:right;">Prima Emitida (MXP)</th>
+          <th style="text-align:right;">Participación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row"><td>1</td><td>Ciudad de México</td><td style="text-align:right;">$1,870,667,292</td><td style="text-align:right;">27.6%</td></tr>
+        <tr class="highlight-row"><td>2</td><td>Estado de México</td><td style="text-align:right;">$726,987,098</td><td style="text-align:right;">10.7%</td></tr>
+        <tr class="highlight-row"><td>3</td><td>Nuevo León</td><td style="text-align:right;">$471,438,381</td><td style="text-align:right;">6.9%</td></tr>
+        <tr class="highlight-row"><td>4</td><td>Jalisco</td><td style="text-align:right;">$410,610,243</td><td style="text-align:right;">6.1%</td></tr>
+        <tr><td>5</td><td>Sonora</td><td style="text-align:right;">$254,366,985</td><td style="text-align:right;">3.7%</td></tr>
+        <tr><td>6</td><td>Baja California</td><td style="text-align:right;">$229,671,451</td><td style="text-align:right;">3.4%</td></tr>
+        <tr><td>7</td><td>Guanajuato</td><td style="text-align:right;">$226,633,249</td><td style="text-align:right;">3.3%</td></tr>
+        <tr><td>8</td><td>Coahuila</td><td style="text-align:right;">$224,467,231</td><td style="text-align:right;">3.3%</td></tr>
+        <tr><td>9</td><td>Veracruz</td><td style="text-align:right;">$208,883,846</td><td style="text-align:right;">3.1%</td></tr>
+        <tr><td>10</td><td>Puebla</td><td style="text-align:right;">$174,132,079</td><td style="text-align:right;">2.6%</td></tr>
+        <tr><td>11</td><td>Zacatecas</td><td style="text-align:right;">$161,721,639</td><td style="text-align:right;">2.4%</td></tr>
+        <tr><td>12</td><td>Tamaulipas</td><td style="text-align:right;">$157,010,460</td><td style="text-align:right;">2.3%</td></tr>
+        <tr><td>13</td><td>Chihuahua</td><td style="text-align:right;">$156,188,313</td><td style="text-align:right;">2.3%</td></tr>
+        <tr><td>14</td><td>Quintana Roo</td><td style="text-align:right;">$132,059,835</td><td style="text-align:right;">1.9%</td></tr>
+        <tr><td>15</td><td>Sinaloa</td><td style="text-align:right;">$128,757,437</td><td style="text-align:right;">1.9%</td></tr>
+        <tr><td>16</td><td>Querétaro</td><td style="text-align:right;">$121,774,790</td><td style="text-align:right;">1.8%</td></tr>
+        <tr><td>17</td><td>Michoacán</td><td style="text-align:right;">$117,564,825</td><td style="text-align:right;">1.7%</td></tr>
+        <tr><td>18</td><td>Campeche</td><td style="text-align:right;">$99,993,721</td><td style="text-align:right;">1.5%</td></tr>
+        <tr><td>19</td><td>San Luis Potosí</td><td style="text-align:right;">$95,540,934</td><td style="text-align:right;">1.4%</td></tr>
+        <tr><td>20</td><td>Aguascalientes</td><td style="text-align:right;">$93,068,868</td><td style="text-align:right;">1.4%</td></tr>
+        <tr><td>21</td><td>Guerrero</td><td style="text-align:right;">$92,942,445</td><td style="text-align:right;">1.4%</td></tr>
+        <tr><td>22</td><td>Hidalgo</td><td style="text-align:right;">$87,302,289</td><td style="text-align:right;">1.3%</td></tr>
+        <tr><td>23</td><td>Yucatán</td><td style="text-align:right;">$78,607,983</td><td style="text-align:right;">1.2%</td></tr>
+        <tr><td>24</td><td>Tabasco</td><td style="text-align:right;">$71,986,216</td><td style="text-align:right;">1.1%</td></tr>
+        <tr><td>25</td><td>Oaxaca</td><td style="text-align:right;">$69,475,649</td><td style="text-align:right;">1.0%</td></tr>
+        <tr><td>26</td><td>Morelos</td><td style="text-align:right;">$67,920,483</td><td style="text-align:right;">1.0%</td></tr>
+        <tr><td>27</td><td>Chiapas</td><td style="text-align:right;">$62,414,457</td><td style="text-align:right;">0.9%</td></tr>
+        <tr><td>28</td><td>Durango</td><td style="text-align:right;">$46,893,434</td><td style="text-align:right;">0.7%</td></tr>
+        <tr><td>29</td><td>Nayarit</td><td style="text-align:right;">$46,859,482</td><td style="text-align:right;">0.7%</td></tr>
+        <tr><td>30</td><td>Baja California Sur</td><td style="text-align:right;">$42,757,307</td><td style="text-align:right;">0.6%</td></tr>
+        <tr><td>31</td><td>Colima</td><td style="text-align:right;">$29,235,417</td><td style="text-align:right;">0.4%</td></tr>
+        <tr><td>32</td><td>Tlaxcala</td><td style="text-align:right;">$28,128,020</td><td style="text-align:right;">0.4%</td></tr>
+        <tr style="background:var(--black);">
+          <td style="color:#fff; border-top-color:var(--gray);" colspan="2"><strong style="color:#fff;">TOTAL NACIONAL</strong></td>
+          <td style="text-align:right; color:#fff; font-weight:700; border-top-color:var(--gray);">$6,786,061,859</td>
+          <td style="text-align:right; color:#fff; font-weight:700; border-top-color:var(--gray);">100.0%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<!-- ─── Map Interactivity Script ─── -->
+<script>
+(function() {
+  // Premium data for color calculation
+  const premiumData = {
+    'Ciudad de México': 1870667292,
+    'Estado de México': 726987098,
+    'Nuevo León': 471438381,
+    'Jalisco': 410610243,
+    'Sonora': 254366985,
+    'Baja California': 229671451,
+    'Guanajuato': 226633249,
+    'Coahuila': 224467231,
+    'Veracruz': 208883846,
+    'Puebla': 174132079,
+    'Zacatecas': 161721639,
+    'Tamaulipas': 157010460,
+    'Chihuahua': 156188313,
+    'Quintana Roo': 132059835,
+    'Sinaloa': 128757437,
+    'Querétaro': 121774790,
+    'Michoacán': 117564825,
+    'Campeche': 99993721,
+    'San Luis Potosí': 95540934,
+    'Aguascalientes': 93068868,
+    'Guerrero': 92942445,
+    'Hidalgo': 87302289,
+    'Yucatán': 78607983,
+    'Tabasco': 71986216,
+    'Oaxaca': 69475649,
+    'Morelos': 67920483,
+    'Chiapas': 62414457,
+    'Durango': 46893434,
+    'Nayarit': 46859482,
+    'Baja California Sur': 42757307,
+    'Colima': 29235417,
+    'Tlaxcala': 28128020
+  };
+
+  const maxPremium = 1870667292;
+  const minPremium = 28128020;
+
+  // Color interpolation: #E0DDDA (low) -> #E63329 (high) using log scale
+  function getHeatColor(value) {
+    var logMin = Math.log(minPremium);
+    var logMax = Math.log(maxPremium);
+    var t = (Math.log(value) - logMin) / (logMax - logMin);
+    t = Math.max(0, Math.min(1, t));
+
+    // Interpolate from #E0DDDA to #F2A8A4 to #E63329
+    var r, g, b;
+    if (t < 0.5) {
+      var s = t * 2;
+      r = Math.round(224 + (242 - 224) * s);
+      g = Math.round(221 + (168 - 221) * s);
+      b = Math.round(218 + (164 - 218) * s);
+    } else {
+      var s = (t - 0.5) * 2;
+      r = Math.round(242 + (230 - 242) * s);
+      g = Math.round(168 + (51 - 168) * s);
+      b = Math.round(164 + (41 - 164) * s);
+    }
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  }
+
+  // Apply colors to all state paths
+  var paths = document.querySelectorAll('#mexico-map path[data-state]');
+  paths.forEach(function(path) {
+    var state = path.getAttribute('data-state');
+    if (premiumData[state]) {
+      path.setAttribute('fill', getHeatColor(premiumData[state]));
+    }
+    path.style.cursor = 'pointer';
+    path.style.transition = 'opacity 0.2s, stroke-width 0.2s';
+  });
+
+  // Tooltip behavior
+  var tooltip = document.getElementById('map-tooltip');
+  var ttName = document.getElementById('tt-name');
+  var ttPremium = document.getElementById('tt-premium');
+  var ttPct = document.getElementById('tt-pct');
+  var mapContainer = tooltip.parentElement;
+
+  paths.forEach(function(path) {
+    path.addEventListener('mouseenter', function(e) {
+      var state = path.getAttribute('data-state');
+      var premium = path.getAttribute('data-premium');
+      var pct = path.getAttribute('data-pct');
+
+      ttName.textContent = state;
+      ttPremium.textContent = 'Prima: $' + premium + ' MXP';
+      ttPct.textContent = pct + ' del total nacional';
+      tooltip.style.display = 'block';
+
+      path.style.opacity = '0.8';
+      path.setAttribute('stroke-width', '2.5');
+      path.setAttribute('stroke', '#1A1A1A');
+    });
+
+    path.addEventListener('mousemove', function(e) {
+      var rect = mapContainer.getBoundingClientRect();
+      var x = e.clientX - rect.left + 15;
+      var y = e.clientY - rect.top - 10;
+
+      // Keep tooltip inside container
+      var ttWidth = tooltip.offsetWidth;
+      if (x + ttWidth > rect.width - 10) {
+        x = e.clientX - rect.left - ttWidth - 15;
+      }
+
+      tooltip.style.left = x + 'px';
+      tooltip.style.top = y + 'px';
+    });
+
+    path.addEventListener('mouseleave', function() {
+      tooltip.style.display = 'none';
+      path.style.opacity = '1';
+      path.setAttribute('stroke-width', '1.5');
+      path.setAttribute('stroke', '#fff');
+    });
+  });
+})();
+</script>
+
 <!-- PARTE II — ESTRUCTURA COMPETITIVA -->
 <!-- ════════════════════════════════════════ -->
 <section class="section" id="competencia">
@@ -821,6 +1251,631 @@
     <p><strong>S&iacute;ntesis de capacidades:</strong> El sector asegurador mexicano est&aacute; evolucionando de una competencia basada en producto y precio hacia una basada en <strong>capacidades operativas, tecnol&oacute;gicas y de servicio</strong>. Los ganadores por ramo no son necesariamente los que tienen m&aacute;s productos, sino los que mejor ejecutan en su segmento. <strong>La implicaci&oacute;n para cualquier aseguradora que quiera expandir su portafolio es clara: primero las capacidades, luego los productos.</strong></p>
   </div>
 </section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     RADIOGRAF&Iacute;A FINANCIERA DEL SECTOR
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<div class="section" id="financiero">
+
+  <div class="part-header">
+    <div class="section-label">An&aacute;lisis Financiero</div>
+    <h2>Radiograf&iacute;a Financiera del Sector</h2>
+    <p>Estructura de costos, rentabilidad t&eacute;cnica y posici&oacute;n competitiva de las principales aseguradoras &mdash; cifras Q4 2025 en miles MXN.</p>
+  </div>
+
+  <!-- ── Callout: Insight clave ── -->
+  <div class="callout" style="margin-top:2rem">
+    <p><strong>El sector vende m&aacute;s que nunca pero las utilidades se comprimen</strong> &mdash; 7 de las 15 principales aseguradoras tienen resultado t&eacute;cnico negativo. El crecimiento en primas no se traduce en rentabilidad operativa.</p>
+  </div>
+
+  <!-- ── A1: Stacked bar chart — Estructura de costos ── -->
+  <h3>Estructura de Costos por Peso de Prima</h3>
+  <p>Para cada aseguradora, el gr&aacute;fico muestra c&oacute;mo se distribuye cada peso de prima emitida entre siniestralidad, costo de adquisici&oacute;n y gastos de operaci&oacute;n. Las barras que exceden el 100% indican p&eacute;rdida t&eacute;cnica.</p>
+
+  <div class="chart-container">
+    <div class="chart-title">Desglose de costos / prima emitida &mdash; Top 10 + Sura (Q4 2025)</div>
+
+    <div style="display:flex;gap:1.5rem;margin-bottom:1.25rem;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--gray)">
+        <div style="width:14px;height:14px;background:var(--red)"></div> Siniestralidad (Sin/PD)
+      </div>
+      <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--gray)">
+        <div style="width:14px;height:14px;background:var(--blue)"></div> Costo Adquisici&oacute;n (CAq/PE)
+      </div>
+      <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--gray)">
+        <div style="width:14px;height:14px;background:var(--amber)"></div> Gastos Operaci&oacute;n (GOp/PE)
+      </div>
+    </div>
+
+    <style>
+      .stacked-chart { display:flex; flex-direction:column; gap:0.55rem; }
+      .stacked-row { display:flex; align-items:center; gap:0.75rem; }
+      .stacked-label { width:130px; font-size:0.82rem; font-weight:600; color:var(--dark); text-align:right; flex-shrink:0; }
+      .stacked-track { flex:1; height:28px; background:#EEEBE7; overflow:visible; position:relative; display:flex; }
+      .stacked-seg { height:100%; display:flex; align-items:center; justify-content:center; min-width:0; }
+      .stacked-seg span { font-size:0.68rem; font-weight:700; color:#fff; white-space:nowrap; }
+      .stacked-total { font-size:0.75rem; font-weight:700; color:var(--gray); margin-left:0.5rem; white-space:nowrap; flex-shrink:0; }
+      .stacked-row.sura-highlight .stacked-label { color:var(--red); }
+      .stacked-row.sura-highlight .stacked-track { outline:2px solid var(--red); outline-offset:1px; }
+      @media (max-width:768px) { .stacked-label { width:90px; font-size:0.75rem; } }
+    </style>
+
+    <div class="stacked-chart">
+      <!-- Banamex: 155.4 + 0.9 + 2.5 = 158.8% — capped visually at ~100% of track, overflow noted -->
+      <div class="stacked-row">
+        <div class="stacked-label">Banamex</div>
+        <div class="stacked-track">
+          <div class="stacked-seg" style="width:97.9%;background:var(--red)"><span>155.4%</span></div>
+          <div class="stacked-seg" style="width:0.6%;background:var(--blue)"></div>
+          <div class="stacked-seg" style="width:1.5%;background:var(--amber)"></div>
+        </div>
+        <div class="stacked-total" style="color:var(--red)">158.8%</div>
+      </div>
+      <!-- Allianz: 140.2 + 9.0 + 2.8 = 152.0% -->
+      <div class="stacked-row">
+        <div class="stacked-label">Allianz</div>
+        <div class="stacked-track">
+          <div class="stacked-seg" style="width:92.2%;background:var(--red)"><span>140.2%</span></div>
+          <div class="stacked-seg" style="width:5.9%;background:var(--blue)"></div>
+          <div class="stacked-seg" style="width:1.9%;background:var(--amber)"></div>
+        </div>
+        <div class="stacked-total" style="color:var(--red)">152.0%</div>
+      </div>
+      <!-- GNP: 76.6 + 22.1 + 5.6 = 104.3% -->
+      <div class="stacked-row">
+        <div class="stacked-label">G.N.P.</div>
+        <div class="stacked-track">
+          <div class="stacked-seg" style="width:73.4%;background:var(--red)"><span>76.6%</span></div>
+          <div class="stacked-seg" style="width:21.2%;background:var(--blue)"><span>22.1%</span></div>
+          <div class="stacked-seg" style="width:5.4%;background:var(--amber)"></div>
+        </div>
+        <div class="stacked-total" style="color:var(--red)">104.3%</div>
+      </div>
+      <!-- Monterrey NYL: 83.6 + 15.0 + 9.8 = 108.4% -->
+      <div class="stacked-row">
+        <div class="stacked-label">Monterrey NYL</div>
+        <div class="stacked-track">
+          <div class="stacked-seg" style="width:77.1%;background:var(--red)"><span>83.6%</span></div>
+          <div class="stacked-seg" style="width:13.8%;background:var(--blue)"><span>15.0%</span></div>
+          <div class="stacked-seg" style="width:9.1%;background:var(--amber)"></div>
+        </div>
+        <div class="stacked-total" style="color:var(--red)">108.4%</div>
+      </div>
+      <!-- AXA: 79.7 + 17.5 + 5.6 = 102.8% -->
+      <div class="stacked-row">
+        <div class="stacked-label">AXA</div>
+        <div class="stacked-track">
+          <div class="stacked-seg" style="width:77.5%;background:var(--red)"><span>79.7%</span></div>
+          <div class="stacked-seg" style="width:17.0%;background:var(--blue)"><span>17.5%</span></div>
+          <div class="stacked-seg" style="width:5.5%;background:var(--amber)"></div>
+        </div>
+        <div class="stacked-total" style="color:var(--red)">102.8%</div>
+      </div>
+      <!-- BBVA: 93.1 + 5.5 + (-0.5) = 98.1% -->
+      <div class="stacked-row">
+        <div class="stacked-label">BBVA</div>
+        <div class="stacked-track">
+          <div class="stacked-seg" style="width:94.9%;background:var(--red)"><span>93.1%</span></div>
+          <div class="stacked-seg" style="width:5.1%;background:var(--blue)"></div>
+        </div>
+        <div class="stacked-total">98.1%</div>
+      </div>
+      <!-- MetLife: 77.3 + 15.6 + 5.8 = 98.7% -->
+      <div class="stacked-row">
+        <div class="stacked-label">MetLife</div>
+        <div class="stacked-track">
+          <div class="stacked-seg" style="width:78.3%;background:var(--red)"><span>77.3%</span></div>
+          <div class="stacked-seg" style="width:15.8%;background:var(--blue)"><span>15.6%</span></div>
+          <div class="stacked-seg" style="width:5.9%;background:var(--amber)"></div>
+        </div>
+        <div class="stacked-total">98.7%</div>
+      </div>
+      <!-- Sura: 62.9 + 20.1 + 12.7 = 95.7% -->
+      <div class="stacked-row sura-highlight">
+        <div class="stacked-label">Seguros SURA</div>
+        <div class="stacked-track">
+          <div class="stacked-seg" style="width:65.7%;background:var(--red)"><span>62.9%</span></div>
+          <div class="stacked-seg" style="width:21.0%;background:var(--blue)"><span>20.1%</span></div>
+          <div class="stacked-seg" style="width:13.3%;background:var(--amber)"><span>12.7%</span></div>
+        </div>
+        <div class="stacked-total">95.7%</div>
+      </div>
+      <!-- Qualitas: 64.5 + 23.1 + 4.6 = 92.2% -->
+      <div class="stacked-row">
+        <div class="stacked-label">Qu&aacute;litas</div>
+        <div class="stacked-track">
+          <div class="stacked-seg" style="width:69.9%;background:var(--red)"><span>64.5%</span></div>
+          <div class="stacked-seg" style="width:25.1%;background:var(--blue)"><span>23.1%</span></div>
+          <div class="stacked-seg" style="width:5.0%;background:var(--amber)"></div>
+        </div>
+        <div class="stacked-total" style="color:var(--green)">92.2%</div>
+      </div>
+      <!-- Mapfre: 62.7 + 24.4 + 2.6 = 89.7% -->
+      <div class="stacked-row">
+        <div class="stacked-label">Mapfre</div>
+        <div class="stacked-track">
+          <div class="stacked-seg" style="width:69.9%;background:var(--red)"><span>62.7%</span></div>
+          <div class="stacked-seg" style="width:27.2%;background:var(--blue)"><span>24.4%</span></div>
+          <div class="stacked-seg" style="width:2.9%;background:var(--amber)"></div>
+        </div>
+        <div class="stacked-total" style="color:var(--green)">89.7%</div>
+      </div>
+      <!-- Banorte: 72.5 + 10.7 + 0 = 83.2% -->
+      <div class="stacked-row">
+        <div class="stacked-label">Banorte</div>
+        <div class="stacked-track">
+          <div class="stacked-seg" style="width:87.1%;background:var(--red)"><span>72.5%</span></div>
+          <div class="stacked-seg" style="width:12.9%;background:var(--blue)"><span>10.7%</span></div>
+        </div>
+        <div class="stacked-total" style="color:var(--green)">83.2%</div>
+      </div>
+    </div>
+
+    <p style="font-size:0.82rem;color:var(--gray);margin-top:1rem">Aseguradoras ordenadas de mayor a menor ratio combinado. Un ratio &gt;100% implica p&eacute;rdida t&eacute;cnica &mdash; la empresa paga m&aacute;s en siniestros y gastos de lo que recibe en primas.</p>
+  </div>
+
+  <!-- ── A2: Scatter — Siniestralidad vs Resultado Técnico ── -->
+  <h3>Mapa de Posicionamiento: Siniestralidad vs. Rentabilidad</h3>
+  <p>Cada punto representa una aseguradora, posicionada seg&uacute;n su siniestralidad (eje horizontal) y resultado t&eacute;cnico sobre prima emitida (eje vertical). Los cuadrantes revelan qui&eacute;n gana dinero y por qu&eacute;.</p>
+
+  <div class="chart-container">
+    <div class="chart-title">Siniestralidad (Sin/PD) vs. Resultado T&eacute;cnico (RT/PE) &mdash; Q4 2025</div>
+
+    <style>
+      .scatter-grid {
+        position: relative;
+        width: 100%;
+        max-width: 720px;
+        height: 420px;
+        margin: 0 auto;
+      }
+      .scatter-area {
+        position: absolute;
+        top: 30px; left: 50px; right: 20px; bottom: 40px;
+        border-left: 2px solid var(--dark);
+        border-bottom: 2px solid var(--dark);
+      }
+      .scatter-quadrant {
+        position: absolute;
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--gray-light);
+        pointer-events: none;
+      }
+      .scatter-dot {
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.58rem;
+        font-weight: 700;
+        color: #fff;
+        transform: translate(-50%, -50%);
+        cursor: default;
+        z-index: 2;
+      }
+      .scatter-dot-label {
+        position: absolute;
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--dark);
+        white-space: nowrap;
+        transform: translate(-50%, -100%);
+        margin-top: -20px;
+        z-index: 3;
+      }
+      .scatter-axis-label {
+        position: absolute;
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--gray);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .scatter-zero-line {
+        position: absolute;
+        left: 0; right: 0;
+        border-top: 1px dashed var(--gray-light);
+        z-index: 1;
+      }
+      .scatter-tick {
+        position: absolute;
+        font-size: 0.68rem;
+        color: var(--gray-light);
+      }
+      @media (max-width:768px) {
+        .scatter-grid { height: 360px; }
+        .scatter-dot { width: 26px; height: 26px; font-size: 0.52rem; }
+        .scatter-dot-label { font-size: 0.65rem; }
+      }
+    </style>
+
+    <div class="scatter-grid">
+      <div class="scatter-area">
+        <!-- Axis labels -->
+        <div class="scatter-axis-label" style="bottom:-32px;left:50%;transform:translateX(-50%)">Siniestralidad (Sin/PD) &rarr;</div>
+        <div class="scatter-axis-label" style="left:-46px;top:50%;transform:rotate(-90deg) translateX(-50%);transform-origin:0 0">RT/PE &rarr;</div>
+
+        <!-- Zero line for RT/PE (RT=0 at ~57% from top, mapping -25 to +10 range) -->
+        <!-- Y axis: -25% to +10% => range 35. Zero at (10/35)*100 = 28.6% from top -->
+        <div class="scatter-zero-line" style="top:28.6%"></div>
+        <div class="scatter-tick" style="left:-30px;top:28.6%;transform:translateY(-50%)">0%</div>
+        <div class="scatter-tick" style="left:-30px;top:0%;transform:translateY(-50%)">+10%</div>
+        <div class="scatter-tick" style="left:-30px;top:100%;transform:translateY(-50%)">-25%</div>
+
+        <!-- X axis ticks: 50% to 160% siniestralidad, range=110 -->
+        <div class="scatter-tick" style="bottom:-20px;left:0%;transform:translateX(-50%)">50%</div>
+        <div class="scatter-tick" style="bottom:-20px;left:45.5%;transform:translateX(-50%)">100%</div>
+        <div class="scatter-tick" style="bottom:-20px;left:91%;transform:translateX(-50%)">150%</div>
+
+        <!-- Quadrant labels -->
+        <div class="scatter-quadrant" style="top:8px;left:8px;color:var(--green)">Estrella</div>
+        <div class="scatter-quadrant" style="top:8px;right:8px;color:var(--amber)">Sobreviviente</div>
+        <div class="scatter-quadrant" style="bottom:8px;left:8px;color:var(--blue)">Ineficiente</div>
+        <div class="scatter-quadrant" style="bottom:8px;right:8px;color:var(--red)">Peligro</div>
+
+        <!-- Dots — X: (sin-50)/110*100%; Y: (10-RT)/35*100% -->
+
+        <!-- Zurich Santander: Sin=49.2 X=0%, RT=9.0 Y=2.9% -->
+        <div class="scatter-dot" style="left:-0.7%;top:2.9%;background:var(--green)">ZS</div>
+        <div class="scatter-dot-label" style="left:-0.7%;top:2.9%">Zurich Sant.</div>
+
+        <!-- Qualitas: Sin=64.5 X=13.2%, RT=9.4 Y=1.7% -->
+        <div class="scatter-dot" style="left:13.2%;top:1.7%;background:var(--green)">Q</div>
+        <div class="scatter-dot-label" style="left:13.2%;top:1.7%">Qu&aacute;litas</div>
+
+        <!-- Inbursa: Sin=72.5 X=20.5%, RT=8.3 Y=4.9% -->
+        <div class="scatter-dot" style="left:20.5%;top:4.9%;background:var(--green)">IN</div>
+        <div class="scatter-dot-label" style="left:20.5%;top:4.9%">Inbursa</div>
+
+        <!-- MetLife: Sin=77.3 X=24.8%, RT=6.4 Y=10.3% -->
+        <div class="scatter-dot" style="left:24.8%;top:10.3%;background:var(--green)">ML</div>
+        <div class="scatter-dot-label" style="left:24.8%;top:10.3%">MetLife</div>
+
+        <!-- Chubb: Sin=52.9 X=2.6%, RT=4.6 Y=15.4% -->
+        <div class="scatter-dot" style="left:2.6%;top:15.4%;background:var(--green)">CH</div>
+        <div class="scatter-dot-label" style="left:2.6%;top:15.4%">Chubb</div>
+
+        <!-- Banorte: Sin=72.5 X=20.5%, RT=2.5 Y=21.4% -->
+        <div class="scatter-dot" style="left:20.5%;top:21.4%;background:var(--green)">BN</div>
+        <div class="scatter-dot-label" style="left:20.5%;top:21.4%">Banorte</div>
+
+        <!-- Sura: Sin=62.9 X=11.7%, RT=2.3 Y=22.0% — highlighted -->
+        <div class="scatter-dot" style="left:11.7%;top:22.0%;background:var(--red);width:38px;height:38px;font-size:0.65rem;box-shadow:0 0 0 3px rgba(230,51,41,0.3)">SURA</div>
+        <div class="scatter-dot-label" style="left:11.7%;top:22.0%;color:var(--red);font-weight:700">Seguros SURA</div>
+
+        <!-- Mapfre: Sin=62.7 X=11.5%, RT=0.1 Y=28.3% -->
+        <div class="scatter-dot" style="left:11.5%;top:28.3%;background:var(--dark)">MP</div>
+        <div class="scatter-dot-label" style="left:11.5%;top:28.3%">Mapfre</div>
+
+        <!-- Atlas: Sin=74.5 X=22.3%, RT=-0.5 Y=30.0% -->
+        <div class="scatter-dot" style="left:22.3%;top:30.0%;background:var(--gray)">AT</div>
+        <div class="scatter-dot-label" style="left:22.3%;top:30.0%">Atlas</div>
+
+        <!-- AXA: Sin=79.7 X=27.0%, RT=-0.6 Y=30.3% -->
+        <div class="scatter-dot" style="left:27.0%;top:30.3%;background:var(--gray)">AX</div>
+        <div class="scatter-dot-label" style="left:27.0%;top:30.3%">AXA</div>
+
+        <!-- BBVA: Sin=93.1 X=39.2%, RT=-2.6 Y=36.0% -->
+        <div class="scatter-dot" style="left:39.2%;top:36.0%;background:var(--amber)">BB</div>
+        <div class="scatter-dot-label" style="left:39.2%;top:36.0%">BBVA</div>
+
+        <!-- GNP: Sin=76.6 X=24.2%, RT=-4.0 Y=40.0% -->
+        <div class="scatter-dot" style="left:24.2%;top:40.0%;background:var(--amber)">GN</div>
+        <div class="scatter-dot-label" style="left:24.2%;top:40.0%">GNP</div>
+
+        <!-- Monterrey NYL: Sin=83.6 X=30.5%, RT=-4.0 Y=40.0% -->
+        <div class="scatter-dot" style="left:30.5%;top:42.0%;background:var(--amber)">NY</div>
+        <div class="scatter-dot-label" style="left:30.5%;top:42.0%">Monterrey</div>
+
+        <!-- HDI: Sin=68.5 X=16.8%, RT=-6.7 Y=47.7% -->
+        <div class="scatter-dot" style="left:16.8%;top:47.7%;background:var(--amber)">HD</div>
+        <div class="scatter-dot-label" style="left:16.8%;top:47.7%">HDI</div>
+
+        <!-- Allianz: Sin=140.2 X=82.0%, RT=-19.8 Y=85.1% -->
+        <div class="scatter-dot" style="left:82.0%;top:85.1%;background:var(--red)">AL</div>
+        <div class="scatter-dot-label" style="left:82.0%;top:85.1%">Allianz</div>
+
+        <!-- Banamex: Sin=155.4 X=95.8%, RT=-23.4 Y=95.4% -->
+        <div class="scatter-dot" style="left:95.8%;top:95.4%;background:var(--red)">BM</div>
+        <div class="scatter-dot-label" style="left:95.8%;top:95.4%">Banamex</div>
+      </div>
+    </div>
+
+    <p style="font-size:0.82rem;color:var(--gray);margin-top:1rem"><strong>Cuadrante Estrella</strong> (baja siniestralidad + RT positivo): Qu&aacute;litas, Zurich Santander, Inbursa, Chubb. <strong>Cuadrante Peligro</strong> (alta siniestralidad + RT negativo): Banamex y Allianz requieren restructuraci&oacute;n urgente.</p>
+  </div>
+
+  <!-- ── Callout: Sura específico ── -->
+  <div class="callout" style="border-left-color:var(--red)">
+    <p><strong>Sura tiene siniestralidad controlada (62.9%) pero los gastos operacionales m&aacute;s altos del sector (12.7% vs. promedio ~5%).</strong> La p&eacute;rdida de $266M no viene de siniestros sino de ineficiencia operativa. En el mapa de posicionamiento, Sura aparece en el cuadrante Estrella &mdash; pero apenas: su resultado t&eacute;cnico de 2.3% es fr&aacute;gil y cualquier deterioro en siniestralidad lo empujar&iacute;a a territorio negativo.</p>
+  </div>
+
+  <!-- ── Tabla resumen financiero ── -->
+  <h3>Tablero Financiero Consolidado</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Compa&ntilde;&iacute;a</th>
+          <th>PD (M)</th>
+          <th>Sin/PD</th>
+          <th>CAq/PE</th>
+          <th>GOp/PE</th>
+          <th>RT/PE</th>
+          <th>Util (MM)</th>
+          <th>RT (MM)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>G.N.P.</td><td>128,430</td><td>76.6%</td><td>22.1%</td><td>5.6%</td><td style="color:var(--red)">-4.0%</td><td>1,421</td><td style="color:var(--red)">-5,174</td></tr>
+        <tr><td>BBVA</td><td>91,085</td><td>93.1%</td><td>5.5%</td><td>-0.5%</td><td style="color:var(--red)">-2.6%</td><td>12,813</td><td style="color:var(--red)">-2,398</td></tr>
+        <tr><td>MetLife</td><td>90,255</td><td>77.3%</td><td>15.6%</td><td>5.8%</td><td style="color:var(--green)">6.4%</td><td>9,978</td><td style="color:var(--green)">5,796</td></tr>
+        <tr><td>Qu&aacute;litas</td><td>71,972</td><td>64.5%</td><td>23.1%</td><td>4.6%</td><td style="color:var(--green)">9.4%</td><td>5,395</td><td style="color:var(--green)">6,739</td></tr>
+        <tr><td>AXA</td><td>65,208</td><td>79.7%</td><td>17.5%</td><td>5.6%</td><td style="color:var(--red)">-0.6%</td><td>-177</td><td style="color:var(--red)">-414</td></tr>
+        <tr><td>Banorte</td><td>58,716</td><td>72.5%</td><td>10.7%</td><td>-0.0%</td><td style="color:var(--green)">2.5%</td><td>6,779</td><td style="color:var(--green)">1,456</td></tr>
+        <tr><td>Banamex</td><td>51,948</td><td style="color:var(--red);font-weight:700">155.4%</td><td>0.9%</td><td>2.5%</td><td style="color:var(--red)">-23.4%</td><td>3,410</td><td style="color:var(--red)">-12,136</td></tr>
+        <tr><td>Monterrey NYL</td><td>45,794</td><td>83.6%</td><td>15.0%</td><td>9.8%</td><td style="color:var(--red)">-4.0%</td><td>2,893</td><td style="color:var(--red)">-1,809</td></tr>
+        <tr><td>Mapfre</td><td>38,852</td><td>62.7%</td><td>24.4%</td><td>2.6%</td><td>0.1%</td><td>-167</td><td>52</td></tr>
+        <tr><td>Allianz</td><td>32,379</td><td style="color:var(--red);font-weight:700">140.2%</td><td>9.0%</td><td>2.8%</td><td style="color:var(--red)">-19.8%</td><td>782</td><td style="color:var(--red)">-6,462</td></tr>
+        <tr><td>Inbursa</td><td>31,899</td><td>72.5%</td><td>12.3%</td><td>5.8%</td><td style="color:var(--green)">8.3%</td><td>4,675</td><td style="color:var(--green)">2,642</td></tr>
+        <tr><td>Chubb</td><td>31,148</td><td>52.9%</td><td>25.9%</td><td>7.6%</td><td style="color:var(--green)">4.6%</td><td>76</td><td style="color:var(--green)">1,482</td></tr>
+        <tr><td>Zurich Sant.</td><td>25,119</td><td>49.2%</td><td>23.1%</td><td>1.7%</td><td style="color:var(--green)">9.0%</td><td>3,993</td><td style="color:var(--green)">2,251</td></tr>
+        <tr><td>Atlas</td><td>23,488</td><td>74.5%</td><td>18.0%</td><td>4.5%</td><td style="color:var(--red)">-0.5%</td><td>496</td><td style="color:var(--red)">-129</td></tr>
+        <tr><td>HDI</td><td>14,899</td><td>68.5%</td><td>32.0%</td><td>3.7%</td><td style="color:var(--red)">-6.7%</td><td>546</td><td style="color:var(--red)">-1,002</td></tr>
+        <tr class="highlight-row"><td><strong>Seguros SURA</strong></td><td>7,010</td><td>62.9%</td><td>20.1%</td><td style="color:var(--red);font-weight:700">12.7%</td><td style="color:var(--green)">2.3%</td><td style="color:var(--red)">-266</td><td style="color:var(--green)">158</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:0.82rem;color:var(--gray)"><strong>Fuente:</strong> CNSF / AMIS &mdash; cifras acumuladas Q4 2025, miles MXN. PD = Prima Directa. PE = Prima Emitida. RT = Resultado T&eacute;cnico. Util = Utilidad neta.</p>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SINIESTRALIDAD EN DA&Ntilde;OS: LA PRESI&Oacute;N CRECE
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<div class="section" id="siniestralidad-danos">
+
+  <div class="part-header">
+    <div class="section-label">Da&ntilde;os &mdash; An&aacute;lisis de Siniestralidad</div>
+    <h2>Siniestralidad en Da&ntilde;os: La Presi&oacute;n Crece</h2>
+    <p>Evoluci&oacute;n de la siniestralidad en el ramo de Da&ntilde;os entre 2024 y 2025 &mdash; un sector que crece en primas pero se deteriora en resultados t&eacute;cnicos.</p>
+  </div>
+
+  <!-- ── Callout: Tendencia sectorial ── -->
+  <div class="callout" style="margin-top:2rem">
+    <p><strong>La siniestralidad promedio en Da&ntilde;os subi&oacute; de 52.4% a 57.0% entre las grandes aseguradoras.</strong> El incremento de +4.6 puntos porcentuales entre 2024 y 2025 se&ntilde;ala presi&oacute;n clim&aacute;tica, inflaci&oacute;n en reparaciones y mayor frecuencia siniestral &mdash; un deterioro que amenaza la rentabilidad del ramo.</p>
+  </div>
+
+  <!-- ── B1: Comparativa Sin/PD 2024 vs 2025 ── -->
+  <h3>Siniestralidad Da&ntilde;os: 2025 vs. 2024</h3>
+  <p>Barras comparativas mostrando la evoluci&oacute;n de la siniestralidad (Sin/PD) en Da&ntilde;os por aseguradora. La barra clara representa 2024; la barra oscura, 2025. El delta indica el cambio interanual.</p>
+
+  <div class="chart-container">
+    <div class="chart-title">Sin/PD Da&ntilde;os &mdash; Q4 2025 vs. Q4 2024</div>
+
+    <div style="display:flex;gap:1.5rem;margin-bottom:1.25rem;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--gray)">
+        <div style="width:14px;height:14px;background:var(--dark)"></div> 2025
+      </div>
+      <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--gray)">
+        <div style="width:14px;height:14px;background:#CBD5E1"></div> 2024
+      </div>
+      <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--gray)">
+        <div style="width:14px;height:6px;background:var(--red)"></div> Delta negativo (subi&oacute;)
+      </div>
+      <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--gray)">
+        <div style="width:14px;height:6px;background:var(--green)"></div> Delta positivo (baj&oacute;)
+      </div>
+    </div>
+
+    <style>
+      .compare-chart { display:flex; flex-direction:column; gap:1rem; }
+      .compare-row { display:flex; align-items:center; gap:0.75rem; }
+      .compare-label { width:110px; font-size:0.82rem; font-weight:600; color:var(--dark); text-align:right; flex-shrink:0; }
+      .compare-bars { flex:1; display:flex; flex-direction:column; gap:3px; }
+      .compare-bar-wrap { display:flex; align-items:center; gap:0.5rem; }
+      .compare-track { height:16px; background:#EEEBE7; flex:1; overflow:hidden; position:relative; }
+      .compare-fill-2025 { height:100%; background:var(--dark); }
+      .compare-fill-2024 { height:100%; background:#CBD5E1; }
+      .compare-val { font-size:0.75rem; font-weight:700; color:var(--gray); white-space:nowrap; min-width:40px; }
+      .compare-delta { font-size:0.75rem; font-weight:700; white-space:nowrap; min-width:60px; text-align:right; flex-shrink:0; }
+      @media (max-width:768px) { .compare-label { width:80px; font-size:0.75rem; } }
+    </style>
+
+    <div class="compare-chart">
+      <!-- Inbursa: 48.2% → 68.3% = +20.1pp -->
+      <div class="compare-row">
+        <div class="compare-label">Inbursa</div>
+        <div class="compare-bars">
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2025" style="width:91.1%"></div></div>
+            <div class="compare-val">68.3%</div>
+          </div>
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2024" style="width:64.3%"></div></div>
+            <div class="compare-val" style="color:var(--gray-light)">48.2%</div>
+          </div>
+        </div>
+        <div class="compare-delta" style="color:var(--red)">+20.1 pp</div>
+      </div>
+
+      <!-- AXA: 52.3% → 65.0% = +12.7pp -->
+      <div class="compare-row">
+        <div class="compare-label">AXA</div>
+        <div class="compare-bars">
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2025" style="width:86.7%"></div></div>
+            <div class="compare-val">65.0%</div>
+          </div>
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2024" style="width:69.7%"></div></div>
+            <div class="compare-val" style="color:var(--gray-light)">52.3%</div>
+          </div>
+        </div>
+        <div class="compare-delta" style="color:var(--red)">+12.7 pp</div>
+      </div>
+
+      <!-- GNP: 47.7% → 58.8% = +11.1pp -->
+      <div class="compare-row">
+        <div class="compare-label">GNP</div>
+        <div class="compare-bars">
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2025" style="width:78.4%"></div></div>
+            <div class="compare-val">58.8%</div>
+          </div>
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2024" style="width:63.6%"></div></div>
+            <div class="compare-val" style="color:var(--gray-light)">47.7%</div>
+          </div>
+        </div>
+        <div class="compare-delta" style="color:var(--red)">+11.1 pp</div>
+      </div>
+
+      <!-- HDI: 54.9% → 59.8% = +4.9pp -->
+      <div class="compare-row">
+        <div class="compare-label">HDI</div>
+        <div class="compare-bars">
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2025" style="width:79.7%"></div></div>
+            <div class="compare-val">59.8%</div>
+          </div>
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2024" style="width:73.2%"></div></div>
+            <div class="compare-val" style="color:var(--gray-light)">54.9%</div>
+          </div>
+        </div>
+        <div class="compare-delta" style="color:var(--red)">+4.9 pp</div>
+      </div>
+
+      <!-- Quálitas: 56.6% → 59.0% = +2.4pp -->
+      <div class="compare-row">
+        <div class="compare-label">Qu&aacute;litas</div>
+        <div class="compare-bars">
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2025" style="width:78.7%"></div></div>
+            <div class="compare-val">59.0%</div>
+          </div>
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2024" style="width:75.5%"></div></div>
+            <div class="compare-val" style="color:var(--gray-light)">56.6%</div>
+          </div>
+        </div>
+        <div class="compare-delta" style="color:var(--red)">+2.4 pp</div>
+      </div>
+
+      <!-- BBVA: 48.5% → 50.8% = +2.3pp -->
+      <div class="compare-row">
+        <div class="compare-label">BBVA</div>
+        <div class="compare-bars">
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2025" style="width:67.7%"></div></div>
+            <div class="compare-val">50.8%</div>
+          </div>
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2024" style="width:64.7%"></div></div>
+            <div class="compare-val" style="color:var(--gray-light)">48.5%</div>
+          </div>
+        </div>
+        <div class="compare-delta" style="color:var(--red)">+2.3 pp</div>
+      </div>
+
+      <!-- Chubb: 50.7% → 46.3% = -4.4pp -->
+      <div class="compare-row">
+        <div class="compare-label">Chubb</div>
+        <div class="compare-bars">
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2025" style="width:61.7%"></div></div>
+            <div class="compare-val">46.3%</div>
+          </div>
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2024" style="width:67.6%"></div></div>
+            <div class="compare-val" style="color:var(--gray-light)">50.7%</div>
+          </div>
+        </div>
+        <div class="compare-delta" style="color:var(--green)">-4.4 pp</div>
+      </div>
+
+      <!-- Mapfre: 70.6% → 16.1% = -54.5pp -->
+      <div class="compare-row">
+        <div class="compare-label">Mapfre</div>
+        <div class="compare-bars">
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2025" style="width:21.5%"></div></div>
+            <div class="compare-val">16.1%</div>
+          </div>
+          <div class="compare-bar-wrap">
+            <div class="compare-track"><div class="compare-fill-2024" style="width:94.1%"></div></div>
+            <div class="compare-val" style="color:var(--gray-light)">70.6%</div>
+          </div>
+        </div>
+        <div class="compare-delta" style="color:var(--green);font-weight:800">-54.5 pp</div>
+      </div>
+    </div>
+
+    <p style="font-size:0.82rem;color:var(--gray);margin-top:1rem">Ordenado por magnitud del deterioro (mayor incremento primero). Las barras se escalan al 75% m&aacute;ximo de siniestralidad para facilitar comparaci&oacute;n visual.</p>
+  </div>
+
+  <!-- ── Tabla de siniestralidad Daños ── -->
+  <h3>Detalle de Siniestralidad en Da&ntilde;os</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Compa&ntilde;&iacute;a</th>
+          <th>Costo Sin. (M)</th>
+          <th>Crec. YoY</th>
+          <th>Sin/PD 2025</th>
+          <th>Sin/PD 2024</th>
+          <th>Delta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Qu&aacute;litas</td><td>42,437</td><td style="color:var(--red)">+13.9%</td><td>59.0%</td><td>56.6%</td><td style="color:var(--red)">+2.4 pp</td></tr>
+        <tr><td>GNP</td><td>22,718</td><td style="color:var(--red)">+33.9%</td><td>58.8%</td><td>47.7%</td><td style="color:var(--red)">+11.1 pp</td></tr>
+        <tr><td>AXA</td><td>17,604</td><td style="color:var(--red)">+35.2%</td><td>65.0%</td><td>52.3%</td><td style="color:var(--red)">+12.7 pp</td></tr>
+        <tr><td>Chubb</td><td>13,060</td><td style="color:var(--red)">+9.3%</td><td>46.3%</td><td>50.7%</td><td style="color:var(--green)">-4.4 pp</td></tr>
+        <tr><td>Inbursa</td><td>12,813</td><td style="color:var(--red)">+42.7%</td><td>68.3%</td><td>48.2%</td><td style="color:var(--red)">+20.1 pp</td></tr>
+        <tr><td>BBVA</td><td>10,429</td><td style="color:var(--red)">+20.6%</td><td>50.8%</td><td>48.5%</td><td style="color:var(--red)">+2.3 pp</td></tr>
+        <tr><td>HDI</td><td>8,784</td><td style="color:var(--red)">+25.4%</td><td>59.8%</td><td>54.9%</td><td style="color:var(--red)">+4.9 pp</td></tr>
+        <tr><td>Mapfre</td><td>3,126</td><td style="color:var(--green);font-weight:700">-74.4%</td><td style="color:var(--green);font-weight:700">16.1%</td><td>70.6%</td><td style="color:var(--green);font-weight:700">-54.5 pp</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── Callout: Mapfre anomaly ── -->
+  <div class="callout" style="border-left-color:var(--blue)">
+    <p><strong>Anomal&iacute;a Mapfre:</strong> Una ca&iacute;da de -74.4% en costo de siniestros no es org&aacute;nica. Probablemente refleja una liberaci&oacute;n masiva de reservas, reclasificaci&oacute;n contable o run-off de cartera. El dato de 16.1% Sin/PD es at&iacute;pico y debe confirmarse con el detalle de reservas. No obstante, ilustra c&oacute;mo la volatilidad en Da&ntilde;os puede distorsionar los indicadores de un a&ntilde;o a otro.</p>
+  </div>
+
+  <!-- ── Two-col cards: Insights ── -->
+  <div class="two-col">
+    <div class="card">
+      <div class="card-tag tag-maduro">Presion</div>
+      <div class="card-title">Deterioro Generalizado</div>
+      <p>6 de 8 aseguradoras relevantes en Da&ntilde;os reportan incremento interanual en siniestralidad. Inbursa (+20.1 pp) y AXA (+12.7 pp) lideran el deterioro. Solo Chubb logra mejorar su ratio de manera sustentable.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-desarrollo">Implicacion</div>
+      <div class="card-title">Repricing Inevitable</div>
+      <p>Con costos de siniestros creciendo entre +9% y +43% interanual, las aseguradoras enfrentar&aacute;n una disyuntiva: ajustar tarifas al alza (perdiendo competitividad) o absorber el deterioro en m&aacute;rgenes ya comprimidos.</p>
+    </div>
+  </div>
+
+  <p style="font-size:0.82rem;color:var(--gray)"><strong>Fuente:</strong> AMIS / CNSF &mdash; Estad&iacute;stica de Siniestralidad por Ramo, acumulado Q4 2025 vs. Q4 2024.</p>
+
+</div>
 
 <!-- ═══ ACTO II ═══ -->
 <div class="act-divider">
@@ -1609,6 +2664,405 @@
 </section>
 
 <!-- ════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════════ -->
+<!-- LA TRAVESÍA DE SURA — 10 AÑOS EN MÉXICO -->
+<!-- ════════════════════════════════════════ -->
+<section class="section" id="sura-evolucion">
+  <div class="part-header">
+    <div class="section-label">Radiograf&iacute;a Sura</div>
+    <h2>La Traves&iacute;a de Sura: 10 A&ntilde;os en M&eacute;xico</h2>
+    <p>Evoluci&oacute;n hist&oacute;rica, posicionamiento competitivo y estructura de costos de una aseguradora que crece &mdash; pero m&aacute;s lento que el mercado.</p>
+  </div>
+
+  <!-- ── 1. PRIMA DIRECTA EVOLUTION 2016-2025 ── -->
+  <h3 style="margin-top:2.75rem">Prima Directa: La Curva de 10 A&ntilde;os</h3>
+  <p>Sura lleg&oacute; a M&eacute;xico en 2015 como parte de la expansi&oacute;n regional de Suramericana. Diez a&ntilde;os despu&eacute;s, la trayectoria revela un patr&oacute;n de <strong>crecimiento inicial acelerado, un techo prematuro, y una recuperaci&oacute;n que a&uacute;n no alcanza su propio m&aacute;ximo hist&oacute;rico.</strong></p>
+
+  <div class="chart-container">
+    <div class="chart-title">Prima Directa Total Sin Pensiones &mdash; Sura M&eacute;xico (2016&ndash;2025, acumulado Q4, millones MXN)</div>
+    <svg viewBox="0 0 900 380" style="width:100%;height:auto;display:block">
+      <defs>
+        <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#E63329" stop-opacity="0.12"/>
+          <stop offset="100%" stop-color="#E63329" stop-opacity="0.01"/>
+        </linearGradient>
+      </defs>
+      <!-- Grid lines -->
+      <line x1="80" y1="40" x2="860" y2="40" stroke="#E0DDDA" stroke-width="1"/>
+      <line x1="80" y1="100" x2="860" y2="100" stroke="#E0DDDA" stroke-width="1"/>
+      <line x1="80" y1="160" x2="860" y2="160" stroke="#E0DDDA" stroke-width="1"/>
+      <line x1="80" y1="220" x2="860" y2="220" stroke="#E0DDDA" stroke-width="1"/>
+      <line x1="80" y1="280" x2="860" y2="280" stroke="#E0DDDA" stroke-width="1"/>
+      <!-- Y-axis labels -->
+      <text x="72" y="44" text-anchor="end" font-family="Montserrat" font-size="11" fill="#999">$8,000</text>
+      <text x="72" y="104" text-anchor="end" font-family="Montserrat" font-size="11" fill="#999">$7,000</text>
+      <text x="72" y="164" text-anchor="end" font-family="Montserrat" font-size="11" fill="#999">$6,000</text>
+      <text x="72" y="224" text-anchor="end" font-family="Montserrat" font-size="11" fill="#999">$5,000</text>
+      <text x="72" y="284" text-anchor="end" font-family="Montserrat" font-size="11" fill="#999">$4,000</text>
+      <!-- Baseline at 3,500 = y:310 | Scale: 1000M = 60px | 3500→310, 4000→280, 5000→220, 6000→160, 7000→100, 8000→40 -->
+      <!-- Area fill -->
+      <polygon points="
+        167,279
+        254,198
+        341,184
+        428,240
+        515,211
+        602,175
+        689,114
+        732,133
+        776,139
+        863,107
+        863,310
+        167,310
+      " fill="url(#areaGrad)"/>
+      <!-- Line -->
+      <polyline points="
+        167,279
+        254,198
+        341,184
+        428,240
+        515,211
+        602,175
+        689,114
+        732,133
+        776,139
+        863,107
+      " fill="none" stroke="#E63329" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <!-- Data points -->
+      <circle cx="167" cy="279" r="4.5" fill="#E63329"/><!-- 2016: 4,022 -->
+      <circle cx="254" cy="198" r="4.5" fill="#E63329"/><!-- 2017: 5,371 -->
+      <circle cx="341" cy="184" r="4.5" fill="#E63329"/><!-- 2018: 5,769 -->
+      <circle cx="428" cy="240" r="4.5" fill="#E63329"/><!-- 2019: 4,828 -->
+      <circle cx="515" cy="211" r="4.5" fill="#E63329"/><!-- 2020: 5,305 -->
+      <circle cx="602" cy="175" r="4.5" fill="#E63329"/><!-- 2021: 5,900 -->
+      <circle cx="689" cy="114" r="5.5" fill="#E63329"/><!-- 2022: 6,914 (peak) -->
+      <circle cx="732" cy="133" r="4.5" fill="#E63329"/><!-- 2023: 6,589 -->
+      <circle cx="776" cy="139" r="4.5" fill="#E63329"/><!-- 2024: 6,476 -->
+      <circle cx="863" cy="107" r="4.5" fill="#E63329"/><!-- 2025: 7,011 -->
+      <!-- X-axis labels -->
+      <text x="167" y="335" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="600" fill="#666">2016</text>
+      <text x="254" y="335" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="600" fill="#666">2017</text>
+      <text x="341" y="335" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="600" fill="#666">2018</text>
+      <text x="428" y="335" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="600" fill="#666">2019</text>
+      <text x="515" y="335" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="600" fill="#666">2020</text>
+      <text x="602" y="335" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="600" fill="#666">2021</text>
+      <text x="689" y="335" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="600" fill="#666">2022</text>
+      <text x="732" y="335" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="600" fill="#666">2023</text>
+      <text x="776" y="335" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="600" fill="#666">2024</text>
+      <text x="863" y="335" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="600" fill="#666">2025</text>
+      <!-- Value labels -->
+      <text x="167" y="268" text-anchor="middle" font-family="Montserrat" font-size="10" font-weight="700" fill="#1A1A1A">$4,022</text>
+      <text x="254" y="188" text-anchor="middle" font-family="Montserrat" font-size="10" font-weight="700" fill="#1A1A1A">$5,371</text>
+      <text x="341" y="174" text-anchor="middle" font-family="Montserrat" font-size="10" font-weight="700" fill="#1A1A1A">$5,769</text>
+      <text x="428" y="253" text-anchor="middle" font-family="Montserrat" font-size="10" font-weight="700" fill="#1A1A1A">$4,828</text>
+      <text x="515" y="201" text-anchor="middle" font-family="Montserrat" font-size="10" font-weight="700" fill="#1A1A1A">$5,305</text>
+      <text x="602" y="165" text-anchor="middle" font-family="Montserrat" font-size="10" font-weight="700" fill="#1A1A1A">$5,900</text>
+      <text x="689" y="104" text-anchor="middle" font-family="Montserrat" font-size="10" font-weight="700" fill="#E63329">$6,914</text>
+      <text x="732" y="148" text-anchor="middle" font-family="Montserrat" font-size="10" font-weight="700" fill="#1A1A1A">$6,589</text>
+      <text x="776" y="154" text-anchor="middle" font-family="Montserrat" font-size="10" font-weight="700" fill="#1A1A1A">$6,476</text>
+      <text x="863" y="97" text-anchor="middle" font-family="Montserrat" font-size="10" font-weight="700" fill="#1A1A1A">$7,011</text>
+      <!-- Annotations -->
+      <!-- 2017 honeymoon -->
+      <line x1="254" y1="192" x2="254" y2="160" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+      <rect x="200" y="140" width="108" height="20" rx="2" fill="#1A1A1A"/>
+      <text x="254" y="154" text-anchor="middle" font-family="Montserrat" font-size="9" font-weight="700" fill="#fff">+33.5% Honeymoon</text>
+      <!-- 2019 first decline -->
+      <line x1="428" y1="244" x2="428" y2="265" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+      <rect x="378" y="266" width="100" height="20" rx="2" fill="#B45309"/>
+      <text x="428" y="280" text-anchor="middle" font-family="Montserrat" font-size="9" font-weight="700" fill="#fff">-16.3% Ca&iacute;da</text>
+      <!-- 2022 peak -->
+      <rect x="638" y="82" width="102" height="20" rx="2" fill="#E63329"/>
+      <text x="689" y="96" text-anchor="middle" font-family="Montserrat" font-size="9" font-weight="700" fill="#fff">M&aacute;ximo hist&oacute;rico</text>
+      <!-- 2023-2024 decline zone -->
+      <rect x="712" y="112" width="82" height="20" rx="2" fill="rgba(180,83,9,0.15)"/>
+      <text x="754" y="125" text-anchor="middle" font-family="Montserrat" font-size="8.5" font-weight="600" fill="#B45309">2 a&ntilde;os baja</text>
+      <!-- 2025 recovery -->
+      <line x1="863" y1="103" x2="863" y2="72" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+      <rect x="808" y="54" width="110" height="20" rx="2" fill="#059669"/>
+      <text x="863" y="68" text-anchor="middle" font-family="Montserrat" font-size="9" font-weight="700" fill="#fff">+8.3% Recuperaci&oacute;n</text>
+    </svg>
+    <p style="font-size:0.82rem;color:var(--gray);margin-top:0.75rem">Fuente: AMIS Q4 acumulado, 2016&ndash;2025. Prima directa total sin pensiones. El m&aacute;ximo de 2022 ($6,914M) a&uacute;n no se hab&iacute;a superado hasta 2025.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-tag tag-maduro">Fase 1 &mdash; 2016&ndash;2018</div>
+      <div class="card-title">Arranque acelerado</div>
+      <p>Tres a&ntilde;os de crecimiento agresivo impulsados por la novedad del operador colombiano en M&eacute;xico. La prima se multiplic&oacute; 1.4x en dos a&ntilde;os. El +33.5% de 2017 fue el pico de crecimiento &mdash; la &ldquo;luna de miel&rdquo; de la entrada al mercado.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-emergente">Fase 2 &mdash; 2019&ndash;2025</div>
+      <div class="card-title">Meseta vol&aacute;til</div>
+      <p>Tras la ca&iacute;da de 2019 (-16.3%), Sura entr&oacute; en un rango de $4,800&ndash;$7,000M con oscilaciones. Dos a&ntilde;os consecutivos de baja (2023&ndash;2024) revelaron fragilidad. La recuperaci&oacute;n de 2025 es positiva pero a&uacute;n insuficiente vs. crecimiento del mercado.</p>
+    </div>
+  </div>
+
+  <!-- ── 2. SURA vs MARKET GROWTH ── -->
+  <h3>Crecimiento Sura vs. Mercado: La Brecha que se Abre</h3>
+  <p>El dato m&aacute;s revelador no es cu&aacute;nto crece Sura, sino <strong>cu&aacute;nto deja de crecer vs. el mercado</strong>. En cada trimestre de 2024&ndash;2025, el mercado creci&oacute; entre 2x y 5x m&aacute;s r&aacute;pido que Sura.</p>
+
+  <div class="chart-container">
+    <div class="chart-title">Crecimiento YoY &mdash; Mercado Total vs. Sura (2024 Q1&ndash;Q4)</div>
+    <svg viewBox="0 0 900 320" style="width:100%;height:auto;display:block">
+      <!-- Grid -->
+      <line x1="100" y1="40" x2="820" y2="40" stroke="#E0DDDA" stroke-width="1"/>
+      <line x1="100" y1="100" x2="820" y2="100" stroke="#E0DDDA" stroke-width="1"/>
+      <line x1="100" y1="160" x2="820" y2="160" stroke="#E0DDDA" stroke-width="1"/>
+      <line x1="100" y1="220" x2="820" y2="220" stroke="#E0DDDA" stroke-width="1"/>
+      <!-- Y labels: 20%→40, 15%→100, 10%→160, 5%→220, 0%→280 -->
+      <text x="92" y="44" text-anchor="end" font-family="Montserrat" font-size="11" fill="#999">20%</text>
+      <text x="92" y="104" text-anchor="end" font-family="Montserrat" font-size="11" fill="#999">15%</text>
+      <text x="92" y="164" text-anchor="end" font-family="Montserrat" font-size="11" fill="#999">10%</text>
+      <text x="92" y="224" text-anchor="end" font-family="Montserrat" font-size="11" fill="#999">5%</text>
+      <text x="92" y="284" text-anchor="end" font-family="Montserrat" font-size="11" fill="#999">0%</text>
+      <line x1="100" y1="280" x2="820" y2="280" stroke="#E0DDDA" stroke-width="1"/>
+      <!-- Scale: 0%=280, 5%=220, 10%=160, 15%=100, 20%=40 → 1%=12px -->
+      <!-- Bars Q1 -->
+      <rect x="140" y="71" width="55" height="209" fill="#1A1A1A" rx="2"/><!-- Market 17.4% → 280-(17.4*12)=71.2 -->
+      <text x="167" y="64" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="700" fill="#1A1A1A">17.4%</text>
+      <rect x="200" y="237" width="55" height="43" fill="#E63329" rx="2"/><!-- Sura 3.6% → 280-(3.6*12)=236.8 -->
+      <text x="227" y="230" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="700" fill="#E63329">3.6%</text>
+      <text x="197" y="300" text-anchor="middle" font-family="Montserrat" font-size="12" font-weight="600" fill="#666">Q1</text>
+      <!-- Bars Q2 -->
+      <rect x="320" y="122" width="55" height="158" fill="#1A1A1A" rx="2"/><!-- Market 13.2% → 280-(13.2*12)=121.6 -->
+      <text x="347" y="115" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="700" fill="#1A1A1A">13.2%</text>
+      <rect x="380" y="270" width="55" height="10" fill="#E63329" rx="2"/><!-- Sura 0.8% → 280-(0.8*12)=270.4 -->
+      <text x="407" y="264" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="700" fill="#E63329">0.8%</text>
+      <text x="377" y="300" text-anchor="middle" font-family="Montserrat" font-size="12" font-weight="600" fill="#666">Q2</text>
+      <!-- Bars Q3 -->
+      <rect x="500" y="137" width="55" height="143" fill="#1A1A1A" rx="2"/><!-- Market 11.9% → 280-(11.9*12)=137.2 -->
+      <text x="527" y="130" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="700" fill="#1A1A1A">11.9%</text>
+      <rect x="560" y="207" width="55" height="73" fill="#E63329" rx="2"/><!-- Sura 6.1% → 280-(6.1*12)=206.8 -->
+      <text x="587" y="200" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="700" fill="#E63329">6.1%</text>
+      <text x="557" y="300" text-anchor="middle" font-family="Montserrat" font-size="12" font-weight="600" fill="#666">Q3</text>
+      <!-- Bars Q4 -->
+      <rect x="680" y="141" width="55" height="139" fill="#1A1A1A" rx="2"/><!-- Market 11.6% → 280-(11.6*12)=140.8 -->
+      <text x="707" y="134" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="700" fill="#1A1A1A">11.6%</text>
+      <rect x="740" y="180" width="55" height="100" fill="#E63329" rx="2"/><!-- Sura 8.3% → 280-(8.3*12)=180.4 -->
+      <text x="767" y="173" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="700" fill="#E63329">8.3%</text>
+      <text x="737" y="300" text-anchor="middle" font-family="Montserrat" font-size="12" font-weight="600" fill="#666">Q4</text>
+      <!-- Legend -->
+      <rect x="320" y="16" width="12" height="12" fill="#1A1A1A" rx="1"/>
+      <text x="338" y="27" font-family="Montserrat" font-size="11" font-weight="600" fill="#666">Mercado Total</text>
+      <rect x="450" y="16" width="12" height="12" fill="#E63329" rx="1"/>
+      <text x="468" y="27" font-family="Montserrat" font-size="11" font-weight="600" fill="#666">Sura</text>
+    </svg>
+    <p style="font-size:0.82rem;color:var(--gray);margin-top:0.75rem">Fuente: AMIS 2024&ndash;2025, acumulado trimestral. <strong>En Q2, el mercado creci&oacute; 16.5x m&aacute;s que Sura.</strong> Incluso en el mejor trimestre (Q4), el gap fue de 3.3 pp.</p>
+  </div>
+
+  <!-- Participation table -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Trimestre</th><th>Participaci&oacute;n 2024</th><th>Participaci&oacute;n 2025</th><th>Variaci&oacute;n</th><th>Lectura</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Q1</td><td>0.682%</td><td>0.602%</td><td style="color:var(--red);font-weight:700">-0.080 pp</td><td>Pierde share</td></tr>
+        <tr><td>Q2</td><td>0.707%</td><td>0.629%</td><td style="color:var(--red);font-weight:700">-0.078 pp</td><td>Pierde share</td></tr>
+        <tr><td>Q3</td><td>0.700%</td><td>0.663%</td><td style="color:var(--red);font-weight:700">-0.037 pp</td><td>Pierde share</td></tr>
+        <tr class="highlight-row"><td>Q4</td><td>0.741%</td><td>0.718%</td><td style="color:var(--red);font-weight:700">-0.023 pp</td><td>Pierde share (menor gap)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>En los 4 trimestres del a&ntilde;o, Sura perdi&oacute; participaci&oacute;n de mercado. La tendencia mejora levemente (el gap se reduce de 0.08 pp a 0.02 pp), pero la direcci&oacute;n sigue siendo <strong>negativa.</strong></p>
+
+  <!-- ── 3. AUTONOMÍA SIN BANCOS ── -->
+  <h3>Autonom&iacute;a sin Bancos: La Pelea Real</h3>
+  <p>Los bancaseguradores (BBVA, Banamex, Santander, Banorte) captan prima a trav&eacute;s de ventanilla bancaria &mdash; un canal al que Sura no tiene acceso. Para evaluar la competitividad real de Sura, hay que medir su participaci&oacute;n <strong>excluyendo bancaseguradores</strong>. Este es el mercado donde Sura realmente compite.</p>
+
+  <div class="chart-container">
+    <div class="chart-title">Participaci&oacute;n Sura &mdash; Mercado sin Bancaseguradores (Q4 acumulado)</div>
+    <div class="two-col" style="margin:0;gap:1.5rem">
+      <div style="text-align:center">
+        <div style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--gray);margin-bottom:1rem">2024 Q4</div>
+        <svg viewBox="0 0 180 180" style="width:160px;height:160px">
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#E0DDDA" stroke-width="24"/>
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#1A1A1A" stroke-width="24"
+            stroke-dasharray="436.3 3.8" stroke-dashoffset="0" transform="rotate(-90 90 90)"/>
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#E63329" stroke-width="24"
+            stroke-dasharray="3.8 436.3" stroke-dashoffset="0" transform="rotate(-90 90 90)"/>
+          <text x="90" y="84" text-anchor="middle" font-family="Anton" font-size="22" fill="#E63329">0.865%</text>
+          <text x="90" y="104" text-anchor="middle" font-family="Montserrat" font-size="10" fill="#999">Autonom&iacute;a</text>
+        </svg>
+      </div>
+      <div style="text-align:center">
+        <div style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--gray);margin-bottom:1rem">2025 Q4</div>
+        <svg viewBox="0 0 180 180" style="width:160px;height:160px">
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#E0DDDA" stroke-width="24"/>
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#1A1A1A" stroke-width="24"
+            stroke-dasharray="436.9 3.2" stroke-dashoffset="0" transform="rotate(-90 90 90)"/>
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#B45309" stroke-width="24"
+            stroke-dasharray="3.1 436.9" stroke-dashoffset="0" transform="rotate(-90 90 90)"/>
+          <text x="90" y="84" text-anchor="middle" font-family="Anton" font-size="22" fill="#B45309">0.703%</text>
+          <text x="90" y="104" text-anchor="middle" font-family="Montserrat" font-size="10" fill="#999">Autonom&iacute;a</text>
+        </svg>
+        <div style="margin-top:0.75rem">
+          <span class="badge badge-no" style="font-size:0.85rem">-18.7% share loss</span>
+        </div>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:1.5rem;margin-bottom:0">
+      <p><strong>La historia oculta:</strong> Mientras el mercado aut&oacute;nomo (sin bancos) creci&oacute; <strong>+11.6%</strong>, Sura dentro de ese mismo universo <strong>cay&oacute; -9.2%</strong>. Esto no es un problema de canal &mdash; es una p&eacute;rdida de competitividad directa contra aseguradoras que compiten en igualdad de condiciones.</p>
+    </div>
+  </div>
+
+  <div class="card-grid" style="grid-template-columns:repeat(3, 1fr)">
+    <div class="card" style="border-top:3px solid var(--red)">
+      <div style="font-family:'Anton',sans-serif;font-size:2rem;color:var(--red)">-9.2%</div>
+      <div class="card-title" style="font-size:0.88rem;margin-top:0.25rem">Ca&iacute;da Sura Autonom&iacute;a</div>
+      <p style="font-size:0.82rem">Prima Sura en mercado sin bancos. Decline real en volumen.</p>
+    </div>
+    <div class="card" style="border-top:3px solid var(--green)">
+      <div style="font-family:'Anton',sans-serif;font-size:2rem;color:var(--green)">+11.6%</div>
+      <div class="card-title" style="font-size:0.88rem;margin-top:0.25rem">Crecimiento Mercado</div>
+      <p style="font-size:0.82rem">El mercado total creci&oacute; dos d&iacute;gitos. Sura no captur&oacute; ese crecimiento.</p>
+    </div>
+    <div class="card" style="border-top:3px solid var(--amber)">
+      <div style="font-family:'Anton',sans-serif;font-size:2rem;color:var(--amber)">20.8 pp</div>
+      <div class="card-title" style="font-size:0.88rem;margin-top:0.25rem">Gap de Crecimiento</div>
+      <p style="font-size:0.82rem">La brecha entre el crecimiento del mercado y el de Sura. Se est&aacute; quedando atr&aacute;s.</p>
+    </div>
+  </div>
+
+  <!-- ── 4. COST STRUCTURE WATERFALL ── -->
+  <h3>Estructura de Costos: C&oacute;mo se Consume Cada Peso de Prima</h3>
+  <p>El perfil financiero de Sura revela una paradoja: <strong>su siniestralidad es controlada y su costo de adquisici&oacute;n es normal, pero sus gastos operacionales son los m&aacute;s altos del Top 25</strong>. El problema no est&aacute; en el riesgo ni en la distribuci&oacute;n &mdash; est&aacute; en la operaci&oacute;n.</p>
+
+  <div class="chart-container">
+    <div class="chart-title">Desglose de cada peso de prima &mdash; Sura 2025</div>
+    <svg viewBox="0 0 900 360" style="width:100%;height:auto;display:block">
+      <!-- Stacked horizontal bar representing $1.00 → full width 700px from x=100 to x=800 -->
+      <!-- 62.9¢ siniestros = 440.3px -->
+      <rect x="100" y="60" width="440" height="65" fill="#1A1A1A" rx="2"/>
+      <text x="320" y="88" text-anchor="middle" font-family="Montserrat" font-size="13" font-weight="700" fill="#fff">Siniestros</text>
+      <text x="320" y="108" text-anchor="middle" font-family="Montserrat" font-size="11" fill="rgba(255,255,255,0.7)">62.9&cent;</text>
+      <!-- 20.1¢ adquisición = 140.7px -->
+      <rect x="540" y="60" width="141" height="65" fill="#2D2D2D" rx="2"/>
+      <text x="610" y="88" text-anchor="middle" font-family="Montserrat" font-size="12" font-weight="700" fill="#fff">Adquisici&oacute;n</text>
+      <text x="610" y="108" text-anchor="middle" font-family="Montserrat" font-size="11" fill="rgba(255,255,255,0.7)">20.1&cent;</text>
+      <!-- 12.7¢ gastos ops = 88.9px -->
+      <rect x="681" y="60" width="89" height="65" fill="#E63329" rx="2"/>
+      <text x="725" y="88" text-anchor="middle" font-family="Montserrat" font-size="10" font-weight="700" fill="#fff">Gtos. Op.</text>
+      <text x="725" y="108" text-anchor="middle" font-family="Montserrat" font-size="11" fill="rgba(255,255,255,0.7)">12.7&cent;</text>
+      <!-- 2.3¢ resultado técnico = 16.1px -->
+      <rect x="770" y="60" width="30" height="65" fill="#059669" rx="2"/>
+      <text x="785" y="96" text-anchor="middle" font-family="Montserrat" font-size="9" font-weight="700" fill="#fff">2.3&cent;</text>
+
+      <!-- Status labels below each block -->
+      <text x="320" y="148" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="600" fill="#059669">&#10003; Controlada</text>
+      <text x="320" y="163" text-anchor="middle" font-family="Montserrat" font-size="10" fill="#999">Debajo del promedio del sector</text>
+      <text x="610" y="148" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="600" fill="#059669">&#10003; Normal</text>
+      <text x="610" y="163" text-anchor="middle" font-family="Montserrat" font-size="10" fill="#999">En l&iacute;nea con el mercado</text>
+      <text x="725" y="148" text-anchor="middle" font-family="Montserrat" font-size="11" font-weight="600" fill="#E63329">&#10007; PROBLEMA</text>
+      <text x="725" y="163" text-anchor="middle" font-family="Montserrat" font-size="10" fill="#999">2.5x el promedio (~5%)</text>
+      <text x="785" y="148" text-anchor="middle" font-family="Montserrat" font-size="10" font-weight="600" fill="#B45309">Apenas</text>
+      <text x="785" y="163" text-anchor="middle" font-family="Montserrat" font-size="9" fill="#999">sobrevive</text>
+
+      <!-- Arrow to operating loss -->
+      <line x1="450" y1="195" x2="450" y2="225" stroke="#E63329" stroke-width="2" marker-end="url(#arrowRed)"/>
+      <defs><marker id="arrowRed" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#E63329"/></marker></defs>
+
+      <!-- Operating loss bar -->
+      <rect x="100" y="230" width="700" height="50" fill="#FAF8F5" stroke="#E0DDDA" stroke-width="1" rx="2"/>
+      <rect x="100" y="230" width="700" height="50" fill="rgba(230,51,41,0.05)" rx="2"/>
+      <text x="450" y="252" text-anchor="middle" font-family="Poppins" font-size="14" font-weight="700" fill="#E63329">Resultado Operativo: -10.3&cent; por peso &rarr; P&eacute;rdida Operativa</text>
+      <text x="450" y="270" text-anchor="middle" font-family="Montserrat" font-size="11" fill="#999">Utilidad del Ejercicio: -$266 MM &nbsp;|&nbsp; Resultado T&eacute;cnico: +$158 MM (apenas positivo)</text>
+
+      <!-- Comparison bar: industry avg gastos ops -->
+      <text x="100" y="315" font-family="Montserrat" font-size="11" font-weight="700" fill="#1A1A1A">Comparativo Gastos Operacionales / Prima Emitida:</text>
+      <rect x="100" y="325" width="254" height="22" fill="#E63329" rx="2"/>
+      <text x="362" y="341" font-family="Montserrat" font-size="11" font-weight="700" fill="#E63329">Sura: 12.7%</text>
+      <rect x="100" y="325" width="100" height="22" fill="#1A1A1A" rx="2" opacity="0.6"/>
+      <text x="210" y="341" font-family="Montserrat" font-size="11" font-weight="700" fill="#1A1A1A">Promedio: ~5%</text>
+    </svg>
+  </div>
+
+  <!-- KPI cards for financial profile -->
+  <div class="card-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr))">
+    <div class="card" style="text-align:center;padding:1.5rem">
+      <div style="font-family:'Anton',sans-serif;font-size:2rem;color:var(--black)">62.9%</div>
+      <div style="font-size:0.78rem;font-weight:600;color:var(--gray);margin-top:0.25rem">Siniestralidad</div>
+      <div style="margin-top:0.5rem"><span class="badge badge-ok">Controlada</span></div>
+    </div>
+    <div class="card" style="text-align:center;padding:1.5rem">
+      <div style="font-family:'Anton',sans-serif;font-size:2rem;color:var(--black)">20.1%</div>
+      <div style="font-size:0.78rem;font-weight:600;color:var(--gray);margin-top:0.25rem">Costo Adquisici&oacute;n / PE</div>
+      <div style="margin-top:0.5rem"><span class="badge badge-ok">Normal</span></div>
+    </div>
+    <div class="card" style="text-align:center;padding:1.5rem;border:2px solid var(--red)">
+      <div style="font-family:'Anton',sans-serif;font-size:2rem;color:var(--red)">12.7%</div>
+      <div style="font-size:0.78rem;font-weight:600;color:var(--gray);margin-top:0.25rem">Gastos Operacionales / PE</div>
+      <div style="margin-top:0.5rem"><span class="badge badge-no">M&aacute;s alto del Top 25</span></div>
+    </div>
+    <div class="card" style="text-align:center;padding:1.5rem">
+      <div style="font-family:'Anton',sans-serif;font-size:2rem;color:var(--amber)">2.3%</div>
+      <div style="font-size:0.78rem;font-weight:600;color:var(--gray);margin-top:0.25rem">Resultado T&eacute;cnico / PE</div>
+      <div style="margin-top:0.5rem"><span class="badge badge-warn">Apenas positivo</span></div>
+    </div>
+    <div class="card" style="text-align:center;padding:1.5rem">
+      <div style="font-family:'Anton',sans-serif;font-size:2rem;color:var(--red)">-10.3%</div>
+      <div style="font-size:0.78rem;font-weight:600;color:var(--gray);margin-top:0.25rem">Utilidad Operaci&oacute;n / PE</div>
+      <div style="margin-top:0.5rem"><span class="badge badge-no">P&eacute;rdida</span></div>
+    </div>
+  </div>
+
+  <!-- ── 5. NARRATIVE CALLOUT ── -->
+  <div class="callout" style="margin-top:2.5rem;border-left-width:5px">
+    <p style="font-size:1.05rem;line-height:1.85"><strong>Sura no tiene un problema de siniestros &mdash; tiene un problema de eficiencia.</strong></p>
+    <p style="font-size:0.95rem;line-height:1.85;margin-top:0.75rem">Cada peso de prima que cobra, gasta <strong>12.7 centavos en operaci&oacute;n</strong> vs. ~5 centavos del promedio del sector. Si Sura igualara el promedio de gastos operacionales, su resultado t&eacute;cnico pasar&iacute;a de <strong>$158M a ~$700M</strong> y el resultado operativo ser&iacute;a positivo. La oportunidad m&aacute;s grande de Sura no es un nuevo producto ni un nuevo canal &mdash; <strong>es reducir su costo de operar</strong>.</p>
+  </div>
+
+  <!-- Summary diagnostic -->
+  <h3>Diagn&oacute;stico de Posicionamiento</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Dimensi&oacute;n</th><th>Estado</th><th>Evaluaci&oacute;n</th><th>Implicaci&oacute;n</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Crecimiento absoluto</td>
+          <td><span class="badge badge-ok">+8.3%</span></td>
+          <td>Recuperaci&oacute;n tras 2 a&ntilde;os de baja</td>
+          <td>Positivo pero insuficiente vs. mercado</td>
+        </tr>
+        <tr>
+          <td>Market share</td>
+          <td><span class="badge badge-no">0.718%</span></td>
+          <td>Perdiendo share en los 4 trimestres</td>
+          <td>Se aleja del mercado, no se acerca</td>
+        </tr>
+        <tr>
+          <td>Autonom&iacute;a (sin bancos)</td>
+          <td><span class="badge badge-no">0.703% &darr;</span></td>
+          <td>Ca&iacute;da de -9.2% en el mercado &ldquo;justo&rdquo;</td>
+          <td>Problema de competitividad directa</td>
+        </tr>
+        <tr>
+          <td>Siniestralidad</td>
+          <td><span class="badge badge-ok">62.9%</span></td>
+          <td>Debajo del promedio del sector</td>
+          <td>Buena selecci&oacute;n de riesgo</td>
+        </tr>
+        <tr>
+          <td>Gastos operacionales</td>
+          <td><span class="badge badge-no">12.7%</span></td>
+          <td>M&aacute;s alto del Top 25 &mdash; 2.5x promedio</td>
+          <td>Destruye la rentabilidad t&eacute;cnica</td>
+        </tr>
+        <tr class="highlight-row">
+          <td>Resultado operativo</td>
+          <td><span class="badge badge-no">-10.3%</span></td>
+          <td>P&eacute;rdida neta de $266 MM</td>
+          <td>El modelo actual no es sostenible</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
 <!-- PARTE VIII — ANÁLISIS ESTRATÉGICO SURA -->
 <!-- ════════════════════════════════════════ -->
 <section class="section" id="gap">
