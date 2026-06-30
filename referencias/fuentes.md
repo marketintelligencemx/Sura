@@ -125,6 +125,14 @@
 | MetLife México — TempoLife (vida término) | https://www.metlife.com.mx/seguros-de-vida/tempolife/ | SLA Vida: producto término simplificado | 29 jun 2026 |
 | Runa HR — GMM/Vida grupo empresas | https://runahr.com/mx/seguro-de-gastos-medicos-mayores/ | SLA Colectivos: censo, mínimos, emisión días-semanas | 29 jun 2026 |
 | Mapfre — Insurtech ecosystem LatAm 2024 | https://www.mapfre.com/en/insights/innovation/insurtech-ecosystem-latin-america-2024/ | SLA: contexto de digitalización del sector | 29 jun 2026 |
+| CONDUSEF — Boletín IDATU sector seguros Q3 2025 | https://www.gob.mx/condusef/prensa/ya-conoces-el-idatu-del-sector-instituciones-de-seguros-y-seguros-para-la-salud-la-condusef-publica-los-resultados-del-3er-trim-de-2025 | SLA proxy: IDATU promedio sector 9.1; Sura 5.68 (peor); Chubb 9.95, HDI 9.86, BBVA Salud 9.95 | 29 jun 2026 |
+| elceo — Reclamaciones sector asegurador ene-sep 2025 | https://elceo.com/negocios/metlife-gnp-seguros-y-qualitas-las-aseguradoras-con-mayor-numero-de-reclamaciones-en-2025/ | SLA proxy: IR por empresa (Quálitas 18.8, GNP 13.6, MetLife 27/100k vida) | 29 jun 2026 |
+| CONDUSEF Cuentas Claras — Seguro de Vida (mar 2025) | https://www.condusef.gob.mx/documentos/rcd/cuentas_claras/cc-ASEGURADORAS-VIDA-Marzo-2025.pdf | Vida: IR/PRF/TRP por aseguradora (PDF con error de certificado SSL al cierre) | 29 jun 2026 |
+| CONDUSEF Cuentas Claras — GMM/AP (sep-dic 2024) | https://www.condusef.gob.mx/documentos/rcd/cuentas_claras/cc-ASEGURADORAS-GMMAP-dic-2024.pdf | GMM: IR/PRF/TRP por aseguradora (PDF con error SSL); causas reclamación negativa pago 53% | 29 jun 2026 |
+| Buró de Entidades Financieras CONDUSEF | https://www.buro.gob.mx/ | SLA proxy: IR, PRF, TRP por aseguradora y ramo | 29 jun 2026 |
+| CONDUSEF — Micrositio evaluación de ajustadores | https://www.condusef.gob.mx/documentos/prensa/233706_Micrositio_Ajustadores.pdf | Autos: tiempos de atención de ajustador en siniestro | 29 jun 2026 |
+| gastosmedicos.mx — Reembolsos GMM (AXA/GNP) | https://gastosmedicos.mx/guias/reembolsos-gastos-medicos/ | GMM: tiempos de reembolso AXA 3-5 días, GNP 5-10 días | 29 jun 2026 |
+| Informador — Aseguradoras mejor evaluadas CONDUSEF 2025 | https://www.informador.mx/economia/cuales-son-las-aseguradoras-mejor-evaluadas-condusef-publica-clasificacion-2025-20260207-0077.html | Autos: ranking de calidad de servicio | 29 jun 2026 |
 
 ---
 
@@ -134,6 +142,6 @@ No existe un **benchmark público oficial de tiempos de cotización/emisión por
 
 ---
 
-*Total de fuentes documentadas: 85*
+*Total de fuentes documentadas: 93*
 *Fecha de cierre: 29 junio 2026*
 *Formato: agregar fila nueva cada vez que se consulte una fuente nueva*
