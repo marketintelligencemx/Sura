@@ -112,9 +112,28 @@
 | CNSF — Análisis Estadístico de Vida 2023 | https://www.gob.mx/cms/uploads/attachment/file/943453/Ana_lisis_Estadi_stico_de_Vida_2023.pdf | Vida: estructura del ramo, ranking | 12 mar 2026 |
 | El Cronista — Ranking aseguradoras México | https://www.cronista.com/mexico/finanzas-economia/es-segura-tu-aseguradora-checa-como-les-fue-a-gnp-bbva-metlife-y-otras-en-el-ranking-del-sector/ | Macro: ranking general, participación MetLife, GNP, BBVA | 12 mar 2026 |
 | SDP Noticias — Mercado seguros concentrado | https://www.sdpnoticias.com/columnas/concentrado-seguros-mercado-mexico.html | Macro: concentración de mercado, 9 empresas = 90% GMM | 12 mar 2026 |
+| Rastreator México — Cotizador auto | https://www.rastreator.mx/seguros-de-auto/cotizador | SLA Autos: cotiza 10+ aseguradoras en <2 min | 29 jun 2026 |
+| CONDUSEF — Simulador de Seguro de Automóvil | https://webappsos.condusef.gob.mx/SimuladorSeguroAutomovil/entradas-tabs.jsp | SLA Autos: cotización pública instantánea | 29 jun 2026 |
+| Crabi — Seguro auto 100% digital | https://www.crabi.com/cotizar-seguro | SLA Autos: contratación/emisión digital en minutos | 29 jun 2026 |
+| Clupp — Seguro digital | https://clupp.com.mx/ | SLA Autos: contratación en minutos, 100% app | 29 jun 2026 |
+| HDI — Flotillas (empresarial) | https://www.hdi.com.mx/empresas/hdi-flotillas/ | SLA Autos flotillas: suscripción de riesgo (~10 días) | 29 jun 2026 |
+| BBVA — Seguro por flotilla | https://www.bbva.mx/educacion-financiera/seguros/seguro-pyme/como-es-un-seguro-por-flotilla.html | SLA Autos flotillas: proceso asistido de suscripción | 29 jun 2026 |
+| CONDUSEF — Simulador de Gastos Médicos Mayores | https://phpapps.condusef.gob.mx/condusef_gastosmedicosGMM/index.php | SLA GMM: cotización individual en minutos | 29 jun 2026 |
+| AXA — Condiciones Generales Flex Plus GMM | https://axa.mx/documents/51602/72903/GM-CG-FLEXPLUS-AI287-ABR23.pdf | SLA GMM: emisión sujeta a solicitud + cuestionarios médicos | 29 jun 2026 |
+| Seguros México — GMM colectivo empresas | https://segurosmexico.mx/intermediacion-seguros/empresas/gmm/ | SLA GMM colectivo: cotización <24h, siniestralidad 3 años | 29 jun 2026 |
+| Ley sobre el Contrato de Seguro | http://www.diputados.gob.mx/LeyesBiblio/pdf/211.pdf | SLA Vida: techo legal de 30 días (examen médico) | 29 jun 2026 |
+| MetLife México — TempoLife (vida término) | https://www.metlife.com.mx/seguros-de-vida/tempolife/ | SLA Vida: producto término simplificado | 29 jun 2026 |
+| Runa HR — GMM/Vida grupo empresas | https://runahr.com/mx/seguro-de-gastos-medicos-mayores/ | SLA Colectivos: censo, mínimos, emisión días-semanas | 29 jun 2026 |
+| Mapfre — Insurtech ecosystem LatAm 2024 | https://www.mapfre.com/en/insights/innovation/insurtech-ecosystem-latin-america-2024/ | SLA: contexto de digitalización del sector | 29 jun 2026 |
 
 ---
 
-*Total de fuentes documentadas: 72*
-*Fecha de cierre: 12 marzo 2026*
+### Nota metodológica — SLAs por ramo (sección Macro)
+
+No existe un **benchmark público oficial de tiempos de cotización/emisión por ramo** en México: CNSF y AMIS publican primas, siniestralidad y participación, **no SLAs de servicio**. Los tiempos del espectro macro provienen de (a) propuestas de valor de aseguradoras/comparadores, (b) condiciones generales y (c) marco legal (techos, no típicos). **Verificables:** <2 min comparadores auto, emisión digital inmediata insurtechs auto, cotización GMM colectivo <24h, ~10 días suscripción flotillas, plazo legal 30 días Vida. **Estimación de industria:** "minutos" de emisión de Vida temporal en México (verificado a nivel global), tiempos de emisión días-semanas de colectivos. El dato de Daños (~2.9 días cotización / 1.5 expectativa) proviene del levantamiento propio Aldebaran Consulting 2024.
+
+---
+
+*Total de fuentes documentadas: 85*
+*Fecha de cierre: 29 junio 2026*
 *Formato: agregar fila nueva cada vez que se consulte una fuente nueva*
