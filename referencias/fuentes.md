@@ -125,10 +125,15 @@
 | MetLife México — TempoLife (vida término) | https://www.metlife.com.mx/seguros-de-vida/tempolife/ | SLA Vida: producto término simplificado | 29 jun 2026 |
 | Runa HR — GMM/Vida grupo empresas | https://runahr.com/mx/seguro-de-gastos-medicos-mayores/ | SLA Colectivos: censo, mínimos, emisión días-semanas | 29 jun 2026 |
 | Mapfre — Insurtech ecosystem LatAm 2024 | https://www.mapfre.com/en/insights/innovation/insurtech-ecosystem-latin-america-2024/ | SLA: contexto de digitalización del sector | 29 jun 2026 |
-| CONDUSEF — Boletín IDATU sector seguros Q3 2025 | https://www.gob.mx/condusef/prensa/ya-conoces-el-idatu-del-sector-instituciones-de-seguros-y-seguros-para-la-salud-la-condusef-publica-los-resultados-del-3er-trim-de-2025 | SLA proxy: IDATU promedio sector 9.1; Sura 5.68 (peor); Chubb 9.95, HDI 9.86, BBVA Salud 9.95 | 29 jun 2026 |
+| CONDUSEF — Boletín IDATU sector seguros **Q4 2025** | https://www.gob.mx/condusef/prensa/la-condusef-dio-a-conocer-el-idatu-del-sector-instituciones-de-seguros-y-seguros-para-la-salud-al-4-trimestre-de-2025-consultalos-antes-de-decidir | SLA proxy (dato más reciente): IDATU promedio sector 9.27; peores Plan Seguro 7.93, Assurant Vida 7.33; top Zurich Vida/Azteca/BBVA Salud/AXA Salud/Quálitas Salud 10.0; Sura ya NO aparece entre las peores | 9 jul 2026 |
+| CONDUSEF — Boletín IDATU sector seguros Q3 2025 | https://www.gob.mx/condusef/prensa/ya-conoces-el-idatu-del-sector-instituciones-de-seguros-y-seguros-para-la-salud-la-condusef-publica-los-resultados-del-3er-trim-de-2025 | SLA proxy (histórico): IDATU promedio sector 9.1; Sura 5.68 (la peor ese trimestre); Chubb 9.95, HDI 9.86, BBVA Salud 9.95 | 29 jun 2026 |
+| CONDUSEF — Buró de Entidades Financieras (BEF), ramo Vida | https://www.buro.gob.mx/ | Evaluaciones trimestrales 2025: reclamaciones, sanciones y cumplimiento por aseguradora en Vida | 9 jul 2026 |
+| CNSF — Boletines estadísticos e Informe Anual de Labores 2025 | https://www.cnsf.gob.mx/EntidadesSupervisadas/InstitucionesSociedadesMutualistas/Paginas/InformacionEstadistica.aspx | Participación de mercado y primas emitidas por modalidad (dato oficial 2025) | 9 jul 2026 |
+| AMIS Prensa — Resultados de la industria del seguro 2025 | https://www.amisprensa.org/ | Coberturas más contratadas, crecimiento de seguros con ahorro, indemnizaciones pagadas | 9 jul 2026 |
+| Capgemini — World Life Insurance Report 2025 | https://www.capgemini.com/insights/research-library/world-life-insurance-report/ | Benchmark global: expectativas de usuarios y digitalización de la emisión (contexto internacional) | 9 jul 2026 |
 | elceo — Reclamaciones sector asegurador ene-sep 2025 | https://elceo.com/negocios/metlife-gnp-seguros-y-qualitas-las-aseguradoras-con-mayor-numero-de-reclamaciones-en-2025/ | SLA proxy: IR por empresa (Quálitas 18.8, GNP 13.6, MetLife 27/100k vida) | 29 jun 2026 |
 | CONDUSEF Cuentas Claras — Seguro de Vida (mar 2025) | https://www.condusef.gob.mx/documentos/rcd/cuentas_claras/cc-ASEGURADORAS-VIDA-Marzo-2025.pdf | Vida: IR/PRF/TRP por aseguradora (PDF con error de certificado SSL al cierre) | 29 jun 2026 |
-| CONDUSEF Cuentas Claras — GMM/AP (sep-dic 2024) | https://www.condusef.gob.mx/documentos/rcd/cuentas_claras/cc-ASEGURADORAS-GMMAP-dic-2024.pdf | GMM: IR/PRF/TRP por aseguradora (PDF con error SSL); causas reclamación negativa pago 53% | 29 jun 2026 |
+| CONDUSEF Cuentas Claras — GMM/AP (mar 2025) | https://www.condusef.gob.mx/documentos/rcd/cuentas_claras/cc-ASEGURADORAS-GMMAP-Marzo-2025.pdf | GMM: IR/PRF/TRP por aseguradora (PDF con error SSL); causas reclamación negativa pago 53% | 9 jul 2026 |
 | Buró de Entidades Financieras CONDUSEF | https://www.buro.gob.mx/ | SLA proxy: IR, PRF, TRP por aseguradora y ramo | 29 jun 2026 |
 | CONDUSEF — Micrositio evaluación de ajustadores | https://www.condusef.gob.mx/documentos/prensa/233706_Micrositio_Ajustadores.pdf | Autos: tiempos de atención de ajustador en siniestro | 29 jun 2026 |
 | gastosmedicos.mx — Reembolsos GMM (AXA/GNP) | https://gastosmedicos.mx/guias/reembolsos-gastos-medicos/ | GMM: tiempos de reembolso AXA 3-5 días, GNP 5-10 días | 29 jun 2026 |
@@ -140,8 +145,10 @@
 
 No existe un **benchmark público oficial de tiempos de cotización/emisión por ramo** en México: CNSF y AMIS publican primas, siniestralidad y participación, **no SLAs de servicio**. Los tiempos del espectro macro provienen de (a) propuestas de valor de aseguradoras/comparadores, (b) condiciones generales y (c) marco legal (techos, no típicos). **Verificables:** <2 min comparadores auto, emisión digital inmediata insurtechs auto, cotización GMM colectivo <24h, ~10 días suscripción flotillas, plazo legal 30 días Vida. **Estimación de industria:** "minutos" de emisión de Vida temporal en México (verificado a nivel global), tiempos de emisión días-semanas de colectivos. El dato de Daños (~2.9 días cotización / 1.5 expectativa) proviene del levantamiento propio Aldebaran Consulting 2024.
 
+**Actualización IDATU (jul 2026):** el hallazgo "Sura con el peor IDATU del sector (5.68)" corresponde a **Q3 2025**. En la actualización **Q4 2025** de CONDUSEF (dato más reciente), el promedio del sector subió a 9.27 y Sura ya NO aparece entre las peor evaluadas (la más baja publicada fue Plan Seguro, 7.93). El estudio fecha explícitamente el 5.68 como Q3 2025 y anota la mejora de Q4 2025.
+
 ---
 
-*Total de fuentes documentadas: 93*
-*Fecha de cierre: 29 junio 2026*
+*Total de fuentes documentadas: 98*
+*Fecha de cierre: 9 julio 2026*
 *Formato: agregar fila nueva cada vez que se consulte una fuente nueva*
